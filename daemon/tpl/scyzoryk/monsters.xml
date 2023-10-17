@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form action="" method="post">
+<fieldset>
+<legend>Nowy potwór</legend>
+<label>ID: <input name="newId"/></label>
+<label>Nazwa: <input name="newName"/></label>
+<button>dodaj</button>
+</fieldset>
+</form>
+
+<form action="" method="post">
+<p>
+<label>ID: <input name="filter[id]" value="${filter/id}"/></label>
+<label>Nazwa: <input name="filter[name]" value="${filter/name}"/></label>
+<label>Klasa:
+	<select name="filter[class]">
+	<option value="" tal:attributes="selected not:filter/class">&lt;wszystkie&gt;</option>
+	<option tal:repeat="item monsterClasses" tal:attributes=" value repeat/item/key; selected php:filter.class == repeat.item.key">${item}</option>
+	</select>
+</label>
+<button>szukaj</button>
+</p>
+</form>
+
+<form action="" method="post" tal:condition="monsters">
+<table class="border">
+<thead>
+<tr>
+	<th>ID</th>
+	<th>Nazwa</th>
+	<th>Klasa</th>
+	<th>Poziom</th>
+	<th colspan="2"><button>usuń zaznaczone</button></th>
+	<th>Złoto</th>
+	<th>Szansa</th>
+	<th>Dropy</th>
+	<th>Jednostka</th>
+	<th>Tytuł</th>
+</tr>
+</thead>
+<tbody>
+<tr tal:repeat="item monsters">
+	<td>${item/monster_id}</td>
+	<td>${item/name}</td>
+	<td>${item/class}</td>
+	<td>${item/level}</td>
+	<td><a href="monster-edit?id=${item/monster_id}">edytuj</a></td>
+	<td><label><input type="checkbox" name="del[]" value="${item/monster_id}"/> usuń</label></td>
+	<td>${item/gold}</td>
+	<td>${item/chance1} / ${item/chance2}</td>
+	<td><tal:block repeat="x item/drops">${x}<br tal:condition="not:repeat/x/end"/></tal:block></td>
+	<td>${item/combat_unit_id}</td>
+	<td>${item/title_id}</td>
+</tr>
+</tbody>
+</table>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

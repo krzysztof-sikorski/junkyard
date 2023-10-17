@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form tal:condition="event" action="" method="post">
+<fieldset>
+<legend>Dane zdarzenia specjalnego</legend>
+<table>
+
+<tr>
+<th>Szansa</th>
+<td>
+	<input name="chance" size="8" value="${event/chance}"/>
+	<i>Względna częstość występowania zdarzenia.</i>
+</td>
+</tr>
+
+<tr>
+<th>Parametry</th>
+<td>
+	<input name="params" size="32" value="${event/params}"/>
+	<i>Parametry skryptu, oddzielone przecinkami.</i>
+</td>
+</tr>
+
+<tr>
+<th></th>
+<td>
+	<button type="reset">cofnij</button>
+	<button>zapisz</button>
+	<a href="location-edit?id=${event/location_id}">wróć do listy</a>
+</td>
+<td></td>
+</tr>
+
+</table>
+</fieldset>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

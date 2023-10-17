@@ -1,0 +1,86 @@
+<section>
+	<h1>${shopName}</h1>
+	<p tal:condition="shopDescription"><i tal:content="structure shopDescription"></i></p>
+	<p tal:condition="not:bankEnabled">
+		W sakiewce masz <b>${goldPurse}</b> sztuk złota.
+	</p>
+	<p tal:condition="bankEnabled">
+		Na koncie masz <b>${goldBank}</b> sztuk złota,
+		w sakiewce <b>${goldPurse}</b> sztuk złota.
+		Możesz zapłacić przelewem.
+	</p>
+</section>
+
+<section tal:condition="hasItems">
+	<h1>Sprzedaż</h1>
+	<form action="" method="post">
+		<select name="sell[]" size="10" multiple="multiple">
+			<optgroup tal:condition="equipment" label="Założone">
+				<option tal:repeat="row equipment" value="${row/inventory_id}">
+					[${row/_price} zł] ${row/item/name}
+					<tal:block condition="exists:row/flags/bound">(przypisany)</tal:block>
+					<tal:block condition="exists:row/flags/identified">(zident.)</tal:block>
+				</option>
+			</optgroup>
+			<optgroup tal:condition="inventory" label="Plecak">
+				<option tal:repeat="row inventory" value="${row/inventory_id}">
+					[${row/_price} zł] ${row/item/name}
+					<tal:block condition="exists:row/flags/bound">(przypisany)</tal:block>
+					<tal:block condition="exists:row/flags/identified">(zident.)</tal:block>
+				</option>
+			</optgroup>
+			<optgroup tal:condition="storage" label="Schowek">
+				<option tal:repeat="row storage" value="${row/inventory_id}">
+					[${row/_price} zł] ${row/item/name}
+					<tal:block condition="exists:row/flags/bound">(przypisany)</tal:block>
+					<tal:block condition="exists:row/flags/identified">(zident.)</tal:block>
+				</option>
+			</optgroup>
+		</select>
+		<br/>
+		<button>sprzedaj</button>
+		<i>Możesz wybrać kilka przedmiotów na raz (SHIFT,CTRL).</i>
+	</form>
+</section>
+
+<section tal:repeat="group shopItems" class="item-list">
+<h1>${group/name}</h1>
+<img src="static/item-types/${repeat/group/key}.gif" alt=""/>
+<table class="border">
+
+<thead>
+<tr>
+	<th>Przedmiot</th>
+	<th>Ilość</th>
+	<th>Cena</th>
+	<th>Kup</th>
+	<th style="width:50%">Opis</th>
+</tr>
+</thead>
+
+<tbody>
+<tr tal:repeat="row group/items">
+	<td>${row/name}</td>
+	<td tal:condition="not:row/_drop"><b>&#8734;</b></td>
+	<td tal:condition="row/_drop">${row/_quantity} szt.</td>
+	<td>${row/_price} zł</td>
+	<td tal:condition="not:row/_canBuy"><i>za mało złota</i></td>
+	<td tal:condition="row/_canBuy">
+		<i tal:condition="row/_soldOff">brak towaru</i>
+		<form tal:condition="not:row/_soldOff" action="" method="post">
+			<button name="buy" value="${row/item_id}">kup</button>
+			<input name="amount" value="1" size="6"/>
+			<tal:block condition="row/_canBind">
+				<label><input type="checkbox" name="bind" value="1"/>z przypisaniem</label>
+			</tal:block>
+		</form>
+	</td>
+	<td>
+		<tal:block condition="row/description"><i>${row/description}</i><br/></tal:block>
+		${row/getDescription}
+	</td>
+</tr>
+</tbody>
+
+</table>
+</section>

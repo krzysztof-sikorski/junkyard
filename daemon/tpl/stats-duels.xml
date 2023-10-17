@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+
+<tal:block metal:use-macro="macros.xml/menuBar" define="options menu"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<table class="border">
+
+<tr>
+<th>Nr</th>
+<th>Data pojedynku</th>
+<th><abbr title="Przeliczenie">Prz.</abbr></th>
+<th>Ataker</th>
+<th>Obrońca</th>
+<th>Typ walki</th>
+<th>Zwycięzca</th>
+<th tal:condition="activeCharacter/character_id">Log walki</th>
+</tr>
+
+<tr tal:repeat="item list">
+<td>${item/duel_id}</td>
+<td>${item/date_added}</td>
+<td>${item/rollover_id}</td>
+<td tal:condition="not:item/attacker_name"><i>postać usunięta</i></td>
+<td tal:condition="item/attacker_name"><a href="stats-characters?view=${item/attacker_id}">${item/attacker_name}</a></td>
+<td tal:condition="not:item/defender_name"><i>postać usunięta</i></td>
+<td tal:condition="item/defender_name"><a href="stats-characters?view=${item/defender_id}">${item/defender_name}</a></td>
+<td>${item/type}</td>
+<td>${item/winner}</td>
+<tal:block condition="activeCharacter/character_id">
+	<td tal:condition="not:item/log_exists"><i>niedostępny</i></td>
+	<td tal:condition="item/log_exists"><a href="?view=${item/duel_id}">pokaż</a></td>
+</tal:block>
+</tr>
+
+</table>
+
+<p tal:condition="nextUrl"><a href="${nextUrl}">następna strona...</a></p>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

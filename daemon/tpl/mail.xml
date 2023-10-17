@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<form action="" method="post">
+<p>
+<textarea name="msg" cols="100" rows="5">${inputMsg}</textarea>
+<br/>
+<label>Adresat: <input name="to" value="${inputTo}" size="32"/></label>
+<button>wyślij wiadomość</button> <a href="http://pl.daemon.wikia.com/wiki/BBCode">ściągawka</a>
+</p>
+</form>
+
+<section tal:repeat="item list">
+<h3>
+	<a tal:condition="item/sender_id" href="stats-characters?view=${item/sender_id}">${item/sender_name}</a>
+	<tal:block condition="item/recipient_id">
+	do: <a href="stats-characters?view=${item/recipient_id}">${item/recipient_name}</a>
+	</tal:block>
+</h3>
+<p>Wysłane: ${item/date_added} <a tal:condition="exists:item/replyUrl" href="${item/replyUrl}">[odpowiedz]</a></p>
+<blockquote tal:content="structure item/content"></blockquote>
+</section>
+
+<p tal:condition="nextUrl"><a href="${nextUrl}">pokaż starsze wiadomości...</a></p>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form tal:condition="region" action="" method="post">
+<fieldset>
+<legend>Dane regionu</legend>
+<table>
+
+<tr>
+<th>ID</th>
+<td>
+	<input name="id" size="32" value="${region/region_id}"/>
+	<i>Zmień by utworzyć kopię.</i>
+</td>
+</tr>
+
+<tr>
+<th>Nazwa</th>
+<td>
+	<input name="name" size="48" value="${region/name}"/>
+</td>
+</tr>
+
+<tr>
+<th>Respawn</th>
+<td>
+	<select name="respawn_id">
+	<option value="" tal:attributes="selected not:region/respawn_id">&lt;brak&gt;</option>
+	<option tal:repeat="item locations" tal:attributes=" value item/location_id; selected php:region.respawn_id == item['location_id']">${item/name}</option>
+	</select>
+	<i>Lokacja w której może odrodzić się postać jeśli choć raz odwiedziła dany region.</i>
+</td>
+</tr>
+
+<tr>
+<th>Obrazek (URL)</th>
+<td>
+	<input name="picture_url" size="48" value="${region/picture_url}"/>
+</td>
+</tr>
+
+<tr>
+<th></th>
+<td>
+	<button type="reset">cofnij</button>
+	<button>zapisz</button>
+	<a href="regions">wróć do listy</a>
+</td>
+<td></td>
+</tr>
+
+</table>
+</fieldset>
+</form>
+
+<h2>Lokacje</h2>
+
+<form action="locations" method="post">
+<p>
+	<input type="hidden" name="filter[id]" value=""/>
+	<input type="hidden" name="filter[name]" value=""/>
+	<input type="hidden" name="filter[region_id]" value="${region/region_id}"/>
+	<button>pokaż lokacje</button>
+</p>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

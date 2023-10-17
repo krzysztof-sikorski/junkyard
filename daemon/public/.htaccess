@@ -1,0 +1,10 @@
+DirectoryIndex index.php
+Redirect gone ./favicon.ico
+Redirect permanent /help http://pl.daemon.wikia.com/wiki/Daemon_Wiki
+
+RewriteEngine On
+
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ /$1.php [L,QSA]

@@ -1,0 +1,39 @@
+<form action="" method="post">
+<p>
+	<label>Nazwa przedmiotu: <input name="target" value="${target}" size="32"/></label>
+	<button name="cast" value="${spellId}">rzuć zaklęcie (${cost} MP)</button>
+</p>
+</form>
+
+<tal:block condition="result">
+<h2>${result/item/name}</h2>
+<table>
+<tr>
+	<th>Typ</th>
+	<td>${result/typeName}</td>
+</tr>
+<tr tal:condition="result/item/damage_type">
+	<th>Obrażenia</th>
+	<td>${result/damageType}</td>
+</tr>
+<tr>
+	<th>Wartość</th>
+	<td>${result/item/value} złota</td>
+</tr>
+<tr tal:condition="result/item/description">
+	<th>Opis</th>
+	<td>${result/item/description}</td>
+</tr>
+</table>
+<h2>Występowanie</h2>
+<table>
+<tr>
+	<th>Potwory</th>
+	<td tal:content="result/monsters | default"><i>brak</i></td>
+</tr>
+<tr>
+	<th>Sklepy</th>
+	<td tal:content="result/shops | default"><i>brak</i></td>
+</tr>
+</table>
+</tal:block>

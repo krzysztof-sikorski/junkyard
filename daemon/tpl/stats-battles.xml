@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+
+<tal:block metal:use-macro="macros.xml/menuBar" define="options menu"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<table class="border">
+
+<tr>
+<th>Nr</th>
+<th><abbr title="Przeliczenie">Prz.</abbr></th>
+<th>Lokacja</th>
+<th>Typ walki</th>
+<th>Log walki</th>
+</tr>
+
+<tr tal:repeat="item list">
+<td>${item/battle_id}</td>
+<td>${item/rollover_id}</td>
+<td>${item/location_name}</td>
+<td>${item/type}</td>
+<td tal:condition="item/log_exists"><a href="?view=${item/battle_id}">pokaż</a></td>
+</tr>
+
+</table>
+
+<p tal:condition="nextUrl"><a href="${nextUrl}">następna strona...</a></p>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form action="" method="post" tal:condition="rows">
+<table class="border">
+<thead>
+<tr>
+	<th>ID</th>
+	<th>Login</th>
+	<th>Rejestracja</th>
+	<th>Ostatni login</th>
+	<th>Prawa</th>
+	<th></th>
+	<th>Postacie</th>
+</tr>
+</thead>
+<tbody>
+<tr tal:repeat="item rows">
+	<td>${item/player_id}</td>
+	<td>${item/login}</td>
+	<td>${item/date_created}</td>
+	<td>${item/last_login}</td>
+	<td>${item/roles}</td>
+	<td><a href="player-edit?id=${item/player_id}">edytuj</a></td>
+	<td><tal:block repeat="x item/characters">${x}<br tal:condition="not:repeat/x/end"/></tal:block></td>
+</tr>
+</tbody>
+</table>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

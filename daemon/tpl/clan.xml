@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<section tal:condition="not:activeCharacter/clan_id">
+
+	<form action="" method="post">
+	<fieldset>
+		<legend>Nowy klan</legend>
+		<label>ID: <input name="id" size="8"/></label>
+		<label>Nazwa: <input name="name" size="32"/></label>
+		<button name="create">załóż</button>
+	</fieldset>
+	</form>
+
+	<form action="" method="post">
+	<fieldset>
+		<legend>Dołącz do klanu</legend>
+		<textarea name="desc" cols="100" rows="5"></textarea>
+		<br/>
+		<label>Id klanu: <input name="join"/></label>
+		<button>wyślij podanie</button> <a href="http://pl.daemon.wikia.com/wiki/BBCode">ściągawka</a>
+	</fieldset>
+	</form>
+
+	<table tal:condition="invitations">
+	<caption>Złożone podania</caption>
+	<tr><th>Klan</th><th>Podanie</th></tr>
+	<tr tal:repeat="item invitations">
+		<td>${item/clan_name} (${item/clan_id})</td>
+		<td tal:content="item/description | default"><i>niewypełnione</i></td>
+	</tr>
+	</table>
+
+</section>
+
+<section tal:condition="activeCharacter/clan_id">
+
+	<form tal:condition="isLeader" action="" method="post">
+	<fieldset>
+		<legend>Ustawienia</legend>
+		<table>
+		<tr>
+		<th><label for="setLeader">Nowy przywódca:</label></th>
+		<td>
+			<select id="setLeader" name="setLeader">
+				<option value="" selected=""></option>
+				<option tal:repeat="row members" value="${row/character_id}">${row/name}</option>
+			</select>
+		</td>
+		</tr>
+		<tr>
+		<th><label for="desc">Opis klanu:</label></th>
+		<td>
+			<textarea id="desc" name="desc" cols="64" rows="5">${clan/description}</textarea>
+			<br/>
+			<a href="http://pl.daemon.wikia.com/wiki/BBCode">ściągawka</a>
+		</td>
+		</tr>
+		<tr>
+		<th></th>
+		<td>
+		<button>zapisz</button>
+		</td>
+		</tr>
+		<tr>
+			<th>Podgląd</th>
+			<td tal:content="structure preview"/>
+		</tr>
+		</table>
+	</fieldset>
+	</form>
+
+	<form action="" method="post">
+		<button tal:condition="not:isLeader" name="leave">odejdź z klanu</button>
+		<button tal:condition="isLeader" name="disband">rozwiąż klan</button>
+	</form>
+
+	<form action="" method="post">
+	<table class="border">
+	<caption>Postacie</caption>
+	<tr>
+		<th>Imię</th>
+		<th>Poziom</th>
+		<th><abbr title="Doświadczenie">EXP</abbr></th>
+		<th>Frakcja</th>
+		<th>Data narodzin</th>
+		<td tal:condition="isLeader"></td>
+	</tr>
+	<tr tal:repeat="item members">
+		<td><a href="?c=${item/character_id}">${item/name}</a></td>
+		<td>${item/level}</td>
+		<td>${item/xp_used}</td>
+		<td tal:condition="not:item/faction_id"><i>brak</i></td>
+		<td tal:condition="item/faction_id">${item/faction_id} (r${item/rank_id})</td>
+		<td>${item/date_created}</td>
+		<td tal:condition="isLeader">
+			<button tal:condition="not:item/_isLeader" name="kick" value="${item/character_id}">wyrzuć</button>
+		</td>
+	</tr>
+	</table>
+	</form>
+
+	<form tal:condition="invitations" action="" method="post">
+	<table class="border">
+	<caption>Podania</caption>
+	<tr>
+		<th>Imię</th>
+		<th>Poziom</th>
+		<th><abbr title="Doświadczenie">EXP</abbr></th>
+		<th>Frakcja</th>
+		<th>Data narodzin</th>
+		<th>Podanie</th>
+		<td></td>
+	</tr>
+	<tr tal:repeat="item invitations">
+		<td><a href="?c=${item/character_id}">${item/character_name}</a></td>
+		<td>${item/level}</td>
+		<td>${item/xp_used}</td>
+		<td tal:condition="not:item/faction_id"><i>brak</i></td>
+		<td tal:condition="item/faction_id">${item/faction_id} (r${item/rank_id})</td>
+		<td>${item/date_created}</td>
+		<td tal:content="structure item/description | default"><i>niewypełnione</i></td>
+		<td><button name="accept" value="${item/character_id}">przyjmij</button></td>
+	</tr>
+	</table>
+	</form>
+
+</section>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body class="center">
+
+<h1><a href="./"><img src="static/biglogo.jpg" alt="Daemon 2"/></a></h1>
+
+<form action="" method="post" tal:condition="registerEnabled">
+<fieldset>
+<legend>Rejestracja</legend>
+<label>Login: <input name="login" class="text"/></label>
+<label>Hasło: <input name="pass" type="password"/></label>
+<label>Powtórz hasło: <input name="pass2" type="password"/></label>
+<button>rejestruj</button>
+</fieldset>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<p>Admistracja <b>nigdy</b> nie będzie prosić o hasła do kont.<br/>
+W ramach jednego konta można posiadać <b>kilka</b> postaci do gry.</p>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

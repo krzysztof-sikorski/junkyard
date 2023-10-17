@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form tal:condition="character" action="" method="post">
+<fieldset>
+<legend>Dane trwałe</legend>
+<table>
+
+<tr>
+<th>Imię</th>
+<td><input name="name" size="48" value="${character/name}"/></td>
+</tr>
+
+<tr>
+<th>Płeć</th>
+<td>
+	<label tal:repeat="gender genders">
+		<input type="radio" name="gender" value="${repeat/gender/key}" tal:attributes="checked php:repeat.gender.key==character.gender"/> ${gender}
+	</label>
+</td>
+</tr>
+
+<tr>
+<th>Ostatna akcja</th>
+<td><input name="last_action" size="32" value="${character/last_action}"/></td>
+</tr>
+
+<tr>
+<th>Klan (ID)</th>
+<td><input name="clan_id" size="8" value="${character/clan_id}"/></td>
+</tr>
+
+<tr>
+<th>Portret postaci (URL)</th>
+<td><input type="url" name="avatar_url" size="64" value="${character/avatar_url}"/></td>
+</tr>
+
+<tr>
+<th>Motto</th>
+<td><input name="quote" size="64" value="${character/quote}"/></td>
+</tr>
+
+<tr>
+<th>Opis</th>
+<td><textarea name="description" cols="64" rows="5">${character/description}</textarea></td>
+</tr>
+
+<tr>
+<th></th>
+<td>
+	<button type="reset">cofnij</button>
+	<button name="save">zapisz</button>
+	<a href="characters">wróć do listy</a>
+</td>
+<td></td>
+</tr>
+
+</table>
+</fieldset>
+</form>
+
+
+<form tal:condition="character" action="" method="post">
+<fieldset>
+<legend>Dane związane z erą</legend>
+<table>
+
+<tr>
+<th>Lokacja (ID)</th>
+<td><input name="location_id" size="32" value="${characterData/location_id}"/></td>
+</tr>
+
+<tr>
+<th>Frakcja</th>
+<td>
+	<label>ID: <input name="faction_id" size="32" value="${characterData/faction_id}"/></label>
+	<label>Punkty: <input name="faction_points" size="8" value="${characterData/faction_points}"/></label>
+	<label>Nr rangi: <input name="rank_id" size="8" value="${characterData/rank_id}"/></label>
+</td>
+</tr>
+
+<tr>
+<th>Tury</th>
+<td><input name="turns" size="8" value="${characterData/turns}"/></td>
+</tr>
+
+<tr>
+<th>Złoto</th>
+<td>
+	<label>Sakiewka: <input name="gold_purse" size="12" value="${characterData/gold_purse}"/></label>
+	<label>Bank: <input name="gold_bank" size="12" value="${characterData/gold_bank}"/></label>
+</td>
+</tr>
+
+<tr>
+<th>Doświadczenie</th>
+<td>
+	<label>Poziom: <input name="level" size="6" value="${characterData/level}"/></label>
+	<label>Wolne: <input name="xp_free" size="8" value="${characterData/xp_free}"/></label>
+	<label>Wydane: <b>${characterData/xp_used}</b></label>
+</td>
+</tr>
+
+<tr>
+<th>Zdrowie</th>
+<td>
+	<input name="health" size="6" value="${characterData/health}"/>
+	/ <input name="health_max" size="6" value="${characterData/health_max}"/>
+</td>
+</tr>
+
+<tr>
+<th>Mana</th>
+<td>
+	<input name="mana" size="6" value="${characterData/mana}"/>
+	/ <input name="mana_max" size="6" value="${characterData/mana_max}"/>
+</td>
+</tr>
+
+<tr>
+<th>Atrybuty</th>
+<td>
+	<label>Siła: <input name="a_str" size="6" value="${characterData/a_str}"/></label>
+	<label>Zręczność: <input name="a_dex" size="6" value="${characterData/a_dex}"/></label>
+	<label>Wytrzymałość: <input name="a_vit" size="6" value="${characterData/a_vit}"/></label>
+	<label>Moc: <input name="a_pwr" size="6" value="${characterData/a_pwr}"/></label>
+	<label>Siła Woli: <input name="a_wil" size="6" value="${characterData/a_wil}"/></label>
+</td>
+</tr>
+
+<tr>
+<th>Umiętności</th>
+<td>
+	<label>PSTR: <input name="s_pstr" size="6" value="${characterData/s_pstr}"/></label>
+	<label>PATK: <input name="s_patk" size="6" value="${characterData/s_patk}"/></label>
+	<label>PDEF: <input name="s_pdef" size="6" value="${characterData/s_pdef}"/></label>
+	<label>PRES: <input name="s_pres" size="6" value="${characterData/s_pres}"/></label>
+	<label>PREG: <input name="s_preg" size="6" value="${characterData/s_preg}"/></label>
+	<br/>
+	<label>MSTR: <input name="s_mstr" size="6" value="${characterData/s_mstr}"/></label>
+	<label>MATK: <input name="s_matk" size="6" value="${characterData/s_matk}"/></label>
+	<label>MDEF: <input name="s_mdef" size="6" value="${characterData/s_mdef}"/></label>
+	<label>MRES: <input name="s_mres" size="6" value="${characterData/s_mres}"/></label>
+	<label>MREG: <input name="s_mreg" size="6" value="${characterData/s_mreg}"/></label>
+</td>
+</tr>
+
+<tr>
+<th>Koszty zaklęć</th>
+<td>
+	<label>Badanie Terenu: <input name="sp_scout" size="6" value="${characterData/sp_scout}"/></label>
+	<label>Identyfikacja: <input name="sp_identify" size="6" value="${characterData/sp_identify}"/></label>
+	<br/>
+	<label>Poznanie Postaci: <input name="sp_vchar" size="6" value="${characterData/sp_vchar}"/></label>
+	<label>Poznanie Potwora: <input name="sp_vmonster" size="6" value="${characterData/sp_vmonster}"/></label>
+	<label>Poznanie Przedmiotu: <input name="sp_vitem" size="6" value="${characterData/sp_vitem}"/></label>
+</td>
+</tr>
+
+<tr>
+<th></th>
+<td>
+	<button type="reset">cofnij</button>
+	<button name="saveData">zapisz</button>
+	<a href="characters">wróć do listy</a>
+</td>
+<td></td>
+</tr>
+
+</table>
+</fieldset>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

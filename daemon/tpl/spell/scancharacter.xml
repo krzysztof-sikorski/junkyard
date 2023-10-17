@@ -1,0 +1,33 @@
+<form action="" method="post">
+<p>
+	<label>Imię postaci: <input name="target" value="${target}" size="32"/></label>
+	<button name="cast" value="${spellId}">rzuć zaklęcie (${cost} MP)</button>
+</p>
+</form>
+
+<tal:block condition="result">
+<h2>${result/char/name}</h2>
+<table>
+<tr>
+	<th>Zdrowie</th>
+	<td>${result/cdata/health} / ${result/cdata/health_max}</td>
+</tr>
+<tr>
+	<th>Mana</th>
+	<td>${result/cdata/mana} / ${result/cdata/mana_max}</td>
+</tr>
+<tr>
+	<th>Sakiewka</th>
+	<td>${result/cdata/gold_purse} złota</td>
+</tr>
+<tr>
+	<th>Lokacja</th>
+	<td>${result/locationName}</td>
+</tr>
+<tr>
+	<th>Ekwipunek</th>
+	<td tal:condition="not:result/equipment"><i>brak</i></td>
+	<td tal:condition="result/equipment">${result/equipment}</td>
+</tr>
+</table>
+</tal:block>

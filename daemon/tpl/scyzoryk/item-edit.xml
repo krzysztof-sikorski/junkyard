@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form tal:condition="item" action="" method="post">
+<fieldset>
+<legend>Dane przedmiotu</legend>
+<table>
+
+<tr>
+<th>ID</th>
+<td>
+	<input name="id" size="32" value="${item/item_id}"/>
+	<i>Zmień by utworzyć kopię.</i>
+</td>
+</tr>
+
+<tr>
+<th>Nazwa</th>
+<td>
+	<input name="name" size="48" value="${item/name}"/>
+</td>
+</tr>
+
+<tr>
+<th>Wartość</th>
+<td>
+	<input name="value" size="8" value="${item/value}"/>
+	<i>Cena zakupu i koszt przypisania.</i>
+	<br/>
+	Wycena: <b>${item/suggested_value}</b>
+	<i>Wyliczana automatycznie z bonusów przy zapisie.</i>
+</td>
+</tr>
+
+<tr>
+<th>Typ</th>
+<td>
+	<label tal:repeat="row itemTypes"><input type="radio" name="type" tal:attributes="value repeat/row/key; checked php:item.type == repeat.row.key"/> ${row}</label>
+</td>
+</tr>
+
+<tr>
+<th>Typ obrażeń</th>
+<td>
+	<label tal:repeat="row itemDamageTypes"><input type="radio" name="damage_type" tal:attributes="value repeat/row/key; checked php:item.damage_type == repeat.row.key"/> ${row}</label>
+	<i>Ignorowane dla typów innych niż broń.</i>
+</td>
+</tr>
+
+<tr>
+<th>Własność specjalna</th>
+<td>
+	<select name="special_type">
+		<option tal:attributes="value string:; selected not:item/special_type">brak</option>
+		<optgroup label="własności broni">
+			<option tal:repeat="row combatAttackSpecials"
+			 tal:attributes="value repeat/row/key; selected php:repeat.row.key == item.special_type">${row}</option>
+		</optgroup>
+		<optgroup label="własności pancerza">
+			<option tal:repeat="row combatArmorSpecials"
+			 tal:attributes="value repeat/row/key; selected php:repeat.row.key == item.special_type">${row}</option>
+		</optgroup>
+		<optgroup label="skrypty użycia">
+			<option tal:repeat="row itemSpecials"
+			 tal:attributes="value repeat/row/key; selected php:repeat.row.key == item.special_type">${row}</option>
+		</optgroup>
+	</select>
+	<label>Parametry: <input name="special_param" size="24" value="${item/special_param}"/></label>
+</td>
+</tr>
+
+<tr>
+<th>Opis</th>
+<td>
+	<textarea name="description" cols="100" rows="5">${item/description}</textarea>
+	<br/><i>Opis statów doklejany jest automatycznie.</i>
+</td>
+</tr>
+
+<tr>
+<th></th>
+<td>
+	<button type="reset">cofnij</button>
+	<button>zapisz</button>
+	<a href="items">wróć do listy</a>
+</td>
+</tr>
+
+</table>
+<hr/>
+<table>
+
+<tr>
+	<th>Cecha bojowa</th><th>Bonus %</th><th>Bonus stały</th>
+</tr>
+<tr>
+	<th>Siła fizyczna</th>
+	<td><input name="p[pstr_p]" value="${item/pstr_p}" size="8"/></td>
+	<td><input name="p[pstr_c]" value="${item/pstr_c}" size="8"/></td>
+</tr>
+<tr>
+	<th>Trafienie fizyczne</th>
+	<td><input name="p[patk_p]" value="${item/patk_p}" size="8"/></td>
+	<td><input name="p[patk_c]" value="${item/patk_c}" size="8"/></td>
+</tr>
+<tr>
+	<th>Obrona fizyczna</th>
+	<td><input name="p[pdef_p]" value="${item/pdef_p}" size="8"/></td>
+	<td><input name="p[pdef_c]" value="${item/pdef_c}" size="8"/></td>
+</tr>
+<tr>
+	<th>Odporność fizyczna</th>
+	<td><input name="p[pres_p]" value="${item/pres_p}" size="8"/></td>
+	<td><input name="p[pres_c]" value="${item/pres_c}" size="8"/></td>
+</tr>
+<tr>
+	<th>Siła magiczna</th>
+	<td><input name="p[mstr_p]" value="${item/mstr_p}" size="8"/></td>
+	<td><input name="p[mstr_c]" value="${item/mstr_c}" size="8"/></td>
+</tr>
+<tr>
+	<th>Trafienie magiczne</th>
+	<td><input name="p[matk_p]" value="${item/matk_p}" size="8"/></td>
+	<td><input name="p[matk_c]" value="${item/matk_c}" size="8"/></td>
+</tr>
+<tr>
+	<th>Obrona magiczna</th>
+	<td><input name="p[mdef_p]" value="${item/mdef_p}" size="8"/></td>
+	<td><input name="p[mdef_c]" value="${item/mdef_c}" size="8"/></td>
+</tr>
+<tr>
+	<th>Odporność magiczna</th>
+	<td><input name="p[mres_p]" value="${item/mres_p}" size="8"/></td>
+	<td><input name="p[mres_c]" value="${item/mres_c}" size="8"/></td>
+</tr>
+<tr>
+	<th>Pancerz</th>
+	<td><i>nie dotyczy</i></td>
+	<td><input name="p[armor]" value="${item/armor}" size="8"/></td>
+</tr>
+<tr>
+	<th>Szybkość</th>
+	<td><input name="p[speed]" value="${item/speed}" size="8"/></td>
+	<td><i>nie dotyczy</i></td>
+</tr>
+<tr>
+	<th>Regeneracja</th>
+	<td><i>nie dotyczy</i></td>
+	<td><input name="p[regen]" value="${item/regen}" size="8"/></td>
+</tr>
+
+</table>
+</fieldset>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

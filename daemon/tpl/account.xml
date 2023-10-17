@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<form action="" method="post">
+<fieldset>
+<legend>Nowa postać</legend>
+<label>Imię postaci: <input name="newName" size="32"/></label>
+<label>Płeć: <select name="newGender">
+<option value="" selected=""></option>
+<tal:block repeat="gender genders">
+<option value="${repeat/gender/key}">${gender}</option>
+</tal:block>
+</select></label>
+<button>dodaj</button>
+</fieldset>
+</form>
+
+<form tal:condition="characters" action="" method="post">
+<table class="border">
+
+<tr>
+<th>Postać</th>
+<th>Poziom</th>
+<th>Tury</th>
+<th>Zdrowie</th>
+<th>Lokacja</th>
+<th colspan="3">Akcja</th>
+</tr>
+
+<tr tal:repeat="char characters">
+<td><a href="stats-characters?view=${char/character_id}">${char/name}</a></td>
+<td>${char/level}</td>
+<td>${char/turns}</td>
+<td>${char/health} / ${char/health_max}</td>
+<td tal:content="char/location_name|default"><i>Otchłań Narodzin</i></td>
+<td><a href="edit-character?id=${char/character_id}">edytuj</a></td>
+<td>
+	<b tal:condition="exists:char/active">aktywna</b>
+	<button tal:condition="not:exists:char/active" name="use" value="${char/character_id}">wybierz</button>
+</td>
+</tr>
+
+</table>
+</form>
+
+<p><a href="edit-account">ustawienia konta</a></p>
+
+<form action="" method="post">
+<p style="margin-top:3em">
+Postać:
+<select name="char">
+<option value="" selected=""></option>
+<option tal:repeat="char characters" tal:attributes="value char/character_id">${char/name}</option>
+</select>
+<button type="submit" name="action" value="reset" style="margin-left:2ex">resetuj</button>
+<button type="submit" name="action" value="delete" style="margin-left:2ex">usuń</button>
+</p>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form action="" method="post">
+<fieldset>
+<legend>Nowa lokacja</legend>
+<label>ID: <input name="newId"/></label>
+<label>Nazwa: <input name="newName"/></label>
+<label>Region:
+	<select name="newRegion">
+	<option value="" selected=""></option>
+	<option tal:repeat="item regions" value="${item/region_id}">${item/name}</option>
+	</select>
+</label>
+<button>dodaj</button><br/>
+<i>Nazwa <q>Otchłań Narodzin</q> jest zarezerwowana dla strony respawnu.</i>
+</fieldset>
+</form>
+
+<form action="" method="post">
+<p>
+<label>ID: <input name="filter[id]" value="${filter/id}"/></label>
+<label>Nazwa: <input name="filter[name]" value="${filter/name}"/></label>
+<label>Region:
+	<select name="filter[region_id]">
+	<option value="" tal:attributes="selected not:filter/region_id">&lt;wszystkie&gt;</option>
+	<option tal:repeat="item regions" tal:attributes=" value item/region_id; selected php:filter.region_id == item['region_id']">${item/name}</option>
+	</select>
+</label>
+<button>szukaj</button>
+</p>
+</form>
+
+<form action="" method="post" tal:condition="locations">
+<table class="border">
+<thead>
+<tr>
+	<th>ID</th>
+	<th>Nazwa</th>
+	<th>Region</th>
+	<th>Typ</th>
+	<th>Szansa</th>
+	<th colspan="2"><button>usuń zaznaczone</button></th>
+	<th>Ścieżki</th>
+	<th>Potwory</th>
+</tr>
+</thead>
+<tbody>
+<tr tal:repeat="item locations">
+	<td>${item/location_id}</td>
+	<td>${item/name}</td>
+	<td tal:content="item/region_name | default"><i>brak</i></td>
+	<td>${item/type}</td>
+	<td>${item/chance1} / ${item/chance2}</td>
+	<td><a href="location-edit?id=${item/location_id}">edytuj</a></td>
+	<td><label><input type="checkbox" name="del[]" value="${item/location_id}"/> usuń</label></td>
+	<td><tal:block repeat="x item/paths">${x}<br tal:condition="not:repeat/x/end"/></tal:block></td>
+	<td><tal:block repeat="x item/monsters">${x}<br tal:condition="not:repeat/x/end"/></tal:block></td>
+</tr>
+</tbody>
+</table>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>
