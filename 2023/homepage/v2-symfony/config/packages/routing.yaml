@@ -1,0 +1,9 @@
+framework:
+    router:
+        utf8: true
+        default_uri: '%app.default_uri%'
+
+when@prod:
+    framework:
+        router:
+            strict_requirements: null

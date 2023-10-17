@@ -1,0 +1,19 @@
+{
+  "name": "krzysztof-sikorski/parallel-lint-bundle",
+  "description": "Dummy project to load parallel-lint package.",
+  "type": "project",
+  "license": "EUPL-1.2",
+  "require-dev": {
+    "php-parallel-lint/php-console-highlighter": "^1.0",
+    "php-parallel-lint/php-parallel-lint": "^1.3"
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "config": {
+    "preferred-install": "dist",
+    "optimize-autoloader": true,
+    "sort-packages": true,
+    "notify-on-install": false,
+    "platform-check": true
+  }
+}
