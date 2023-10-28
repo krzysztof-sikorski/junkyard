@@ -1,0 +1,37 @@
+{
+  "name": "krzysztof-sikorski/coding-standard",
+  "description": "Helper classes for enforcing my personal coding standard",
+  "type": "library",
+  "keywords": [
+    "php-cs-fixer"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Krzysztof Sikorski",
+      "homepage": "https://zerozero.pl/",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "chat": "https://discord.gg/RZ69vTMzEp",
+    "source": "https://gitlab.com/krzysztof-sikorski/php-coding-standard"
+  },
+  "require": {
+    "php": "^8.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "KrzysztofSikorski\\CodingStandard\\": "src/"
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "config": {
+    "preferred-install": "dist",
+    "optimize-autoloader": true,
+    "sort-packages": true,
+    "notify-on-install": false,
+    "platform-check": true
+  }
+}
