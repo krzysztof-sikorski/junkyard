@@ -39,7 +39,7 @@ header, main, footer {
 }
 
 header > h1, main > h1, footer > h1 {
-  @apply tw-my-0 tw-text-4xl;
+  @apply tw-my-0 tw-mt-6 tw-text-4xl;
 }
 
 header p:first-of-type {
