@@ -6,4 +6,5 @@ build:
 
 # Remove compiled file
 clean:
+	rm --recursive --verbose node_modules
 	rm -v public/css/combined.css
