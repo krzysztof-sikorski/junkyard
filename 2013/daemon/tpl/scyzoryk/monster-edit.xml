@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form tal:condition="monster" action="" method="post">
+<fieldset>
+<legend>Dane potwora</legend>
+<table>
+
+<tr>
+<th>Zapisz jako ID</th>
+<td>
+	<input name="monster_id" size="32" value="${monster/monster_id}"/>
+	<i>Zmień by utworzyć kopię.</i>
+</td>
+</tr>
+
+<tr>
+<th>Nazwa</th>
+<td>
+	<input name="name" size="48" value="${monster/name}"/>
+</td>
+</tr>
+
+<tr>
+<th>Poziom</th>
+<td>
+	<input name="level" size="8" value="${monster/level}"/>
+	<i>Także ilość doświadczenia za pokonanie potwora.</i>
+</td>
+</tr>
+
+<tr>
+<th>Klasa</th>
+<td><b>${className} (${monster/class})</b> <i>Wyznaczana automatycznie z poziomu.</i></td>
+</tr>
+
+<tr>
+<th>Złoto</th>
+<td>
+	<input name="gold" size="8" value="${monster/gold}"/>
+</td>
+</tr>
+
+<tr>
+<th>Szansa dropu</th>
+<td>
+	<input name="chance1" size="4" value="${monster/chance1}"/>
+	/ <input name="chance2" size="4" value="${monster/chance2}"/>
+	<i>Łączna szansa na zdobycie przedmiotu.</i>
+</td>
+</tr>
+
+<tr>
+<th>Tytuł</th>
+<td>
+	<select name="title_id">
+	<option value="" tal:attributes="selected not:monster/title_id">&lt;brak&gt;</option>
+	<option tal:repeat="item titles" tal:attributes="value item/title_id; selected php:monster.title_id == item['title_id']">&lt;${item/title_id}&gt; ${item/name_f} / ${item/name_m} / ${item/name_n}</option>
+	</select>
+</td>
+</tr>
+
+<tr>
+<th>Jednostka bojowa</th>
+<td>
+	<select name="combat_unit_id">
+	<option value="" tal:attributes="selected not:monster/combat_unit_id">&lt;brak&gt;</option>
+	<option tal:repeat="item combatUnits" tal:attributes="value item/combat_unit_id; selected php:monster.combat_unit_id == item['combat_unit_id']">&lt;${item/combat_unit_id}&gt; ${item/name}</option>
+	</select>
+</td>
+</tr>
+
+<tr>
+<th></th>
+<td>
+	<button type="reset">cofnij</button>
+	<button>zapisz</button>
+	<a href="monsters">wróć do listy</a>
+</td>
+<td></td>
+</tr>
+
+</table>
+</fieldset>
+</form>
+
+<h2>Upuszczane przedmioty</h2>
+
+<form action="" method="post">
+<fieldset>
+<legend>Nowy przedmiot</legend>
+
+<label>ID: <input name="id" id="searchItem" value=""/></label>
+<img src="../static/search.png" alt="szukaj" data-search-type="i" data-search-target="searchItem"/>
+<button name="addDrop" value="1">dodaj</button>
+</fieldset>
+</form>
+
+<form action="" method="post" tal:condition="drops">
+<table class="border">
+<thead>
+<tr>
+	<th>ID</th>
+	<th>Nazwa</th>
+	<th>Szansa</th>
+	<th colspan="2">
+		<button>usuń zaznaczone</button>
+	</th>
+</tr>
+</thead>
+<tbody>
+<tr tal:repeat="item drops">
+	<td>${item/item_id}</td>
+	<td>${item/name}</td>
+	<td>${item/chance}</td>
+	<td><a href="monster-drop-edit?id=${item/monster_id}&amp;id2=${item/item_id}">edytuj</a></td>
+	<td>
+		<label><input type="checkbox" name="del[]" value="${item/item_id}"/> usuń</label>
+	</td>
+</tr>
+</tbody>
+</table>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

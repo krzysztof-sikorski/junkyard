@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form action="" method="post">
+<fieldset>
+<legend>Generator</legend>
+<table>
+
+<tr>
+<th>ID docelowy</th>
+<td><input name="id" size="32"/> <i>Może nadpisać istniejący przedmiot!</i></td>
+</tr>
+
+<tr>
+<th>Nazwa</th>
+<td><input name="name" size="48"/></td>
+</tr>
+
+<tr>
+<th>Typ</th>
+<td>
+	Broń: <label tal:repeat="row itemWeaponTypes"><input type="radio" name="type" tal:attributes="value repeat/row/key"/> ${row}</label>
+	<br/>
+	Pancerz: <label tal:repeat="row itemArmorTypes"><input type="radio" name="type" tal:attributes="value repeat/row/key"/> ${row}</label>
+</td>
+</tr>
+
+<tr>
+<th>Wartość</th>
+<td><input name="value" size="8"/> <i>Planowana wartość przedmiotu.</i></td>
+</tr>
+
+<tr>
+<th>Szablon</th>
+<td>
+	<select name="template">
+		<option value=""></option>
+		<option tal:repeat="row itemTemplates" tal:attributes="value row/id">&lt;${row/id}&gt; ${row/name}</option>
+	</select>
+</td>
+</tr>
+
+<tr>
+<th></th>
+<td>
+	<button name="generate">generuj</button>
+	<a href="config-generator">ustawienia generatora</a>
+</td>
+</tr>
+
+</table>
+</fieldset>
+</form>
+
+
+<form action="" method="post">
+<fieldset>
+<legend>Mieszator</legend>
+<table>
+
+<tr>
+<th>ID docelowy</th>
+<td><input name="id" size="32"/> <i>Może nadpisać istniejący przedmiot!</i></td>
+</tr>
+
+<tr>
+<th>Nazwa</th>
+<td><input name="name" size="48"/></td>
+</tr>
+
+<tr>
+<th>Przedmioty bazowe</th>
+<td>
+	<label>Waga: <input name="weightA" value="1" size="6"/></label>
+	<label>ID: <input name="baseA" id="baseA"/></label>
+	<img src="../static/search.png" alt="szukaj" data-search-type="i" data-search-target="baseA"/>
+	<br/>
+	<label>Waga: <input name="weightB" value="1" size="6"/></label>
+	<label>ID: <input name="baseB" id="baseB"/></label>
+	<img src="../static/search.png" alt="szukaj" data-search-type="i" data-search-target="baseB"/>
+</td>
+</tr>
+
+<tr>
+<th></th>
+<td><button name="merge">mieszaj</button></td>
+</tr>
+
+</table>
+</fieldset>
+</form>
+
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

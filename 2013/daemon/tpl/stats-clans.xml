@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+
+<tal:block metal:use-macro="macros.xml/menuBar" define="options menu"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<table class="border">
+
+<tr>
+<th>Tag</th>
+<th>Nazwa</th>
+<th>Przywódca</th>
+<th>Wielkość</th>
+<th>Data założenia</th>
+</tr>
+
+<tr tal:repeat="item list">
+<td>${item/clan_id}</td>
+<td><a href="?view=${item/clan_id}">${item/name}</a></td>
+<td tal:condition="not:item/leader_name"><i>brak</i></td>
+<td tal:condition="item/leader_name"><a href="stats-characters?view=${item/leader_id}">${item/leader_name}</a></td>
+<td>${item/members}</td>
+<td>${item/date_created}</td>
+</tr>
+
+</table>
+
+<p tal:condition="nextUrl"><a href="${nextUrl}">następna strona...</a></p>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

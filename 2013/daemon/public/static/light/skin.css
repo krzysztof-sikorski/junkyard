@@ -1,0 +1,31 @@
+@charset "UTF-8";
+@import "../basic.css";
+@media screen
+{
+	* {color:black; border-color:black; outline-color:black}
+	.multicols > *, .box, fieldset, table.border th, table.border td {background-color:white; background-color:rgba(255, 255, 255, 0.5)}
+	body {background-image: url(bg.jpg)}
+	a:link, a:visited {font-weight:bold; color:red}
+	a:link:focus, a:visited:focus {color:red; background-color:darkgray}
+	a:link:hover, a:visited:hover {color:red; background-color:darkgray}
+	.msg {outline-color:red}
+	.msg, .msg > * {color:purple; background-color:inherit}
+	fieldset {border-color:#888}
+	input, select, textarea, button {border-color:#000}
+	input:focus, select:focus, textarea:focus, button:focus, button:focus *,
+	input:hover, select:hover, textarea:hover, button:hover, button:hover *
+		{color:black; border-color:red; background-color:#ccc}
+	[disabled], [disabled]:hover {color:gray; border-color:gray; outline-color:gray; background-color:white}
+	button {background-image:-moz-linear-gradient(center top, white, gray)}
+	button {background-image:-webkit-gradient(linear, left top, left bottom, from(white), to(gray));}
+	#menu .menu-map {background-image:url(otoczenie.png)}
+	#menu .menu-character {background-image:url(postac.png)}
+	#menu .menu-inventory {background-image:url(ekwip.png)}
+	#menu .menu-clan {background-image:url(klan.png)}
+	#menu .menu-mail {background-image:url(poczta.png)}
+	#menu .menu-chat {background-image:url(forum.png)}
+	#menu .menu-account {background-image:url(konto.png)}
+	#menu .menu-register {background-image:url(konto.png)}
+	#menu .menu-stats {background-image:url(ranking.png)}
+	#menu .menu-help {background-image:url(pomoc.png)}
+}

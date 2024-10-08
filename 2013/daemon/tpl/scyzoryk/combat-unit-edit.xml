@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form tal:condition="unit" action="" method="post">
+<fieldset>
+<legend>Dane jednostki</legend>
+<table>
+
+<tr>
+<th>Zapisz jako ID</th>
+<td>
+	<input name="combat_unit_id" size="32" value="${unit/combat_unit_id}"/>
+	<i>Zmień by utworzyć kopię.</i>
+</td>
+</tr>
+
+<tr>
+<th>Nazwa</th>
+<td>
+	<input name="name" size="48" value="${unit/name}"/>
+</td>
+</tr>
+
+<tr>
+	<td colspan="2"><hr/></td>
+</tr>
+
+<tr>
+	<th>Główny atak</th>
+	<td>
+		<label>Rodzaj: <select name="type1">
+			<option value="" tal:attributes="selected not:unit/type1">&lt;brak&gt;</option>
+			<option tal:repeat="item attackTypes" tal:attributes=" value repeat/item/key; selected php:unit.type1 == repeat.item.key">${item}</option>
+		</select></label>
+		<label>Ilość ciosów: <input name="count1" size="4" value="${unit/count1}"/></label>
+		<label>Siła: <input name="str1" size="8" value="${unit/str1}"/></label>
+		<label>Trafienie: <input name="atk1" size="8" value="${unit/atk1}"/></label>
+		<br/>
+		<label>Własność specjalna: <select name="sp1_type">
+			<option value="" tal:attributes="selected not:unit/sp1_type">&lt;brak&gt;</option>
+			<option tal:repeat="item attackSpecials" tal:attributes=" value repeat/item/key; selected php:unit.sp1_type == repeat.item.key">${item}</option>
+		</select></label>
+		<label>Wartość: <input name="sp1_param" size="8" value="${unit/sp1_param}"/></label>
+	</td>
+</tr>
+
+<tr>
+	<th>Drugi atak</th>
+	<td>
+		<label>Rodzaj: <select name="type2">
+			<option value="" tal:attributes="selected not:unit/type2">&lt;brak&gt;</option>
+			<option tal:repeat="item attackTypes" tal:attributes=" value repeat/item/key; selected php:unit.type2 == repeat.item.key">${item}</option>
+		</select></label>
+		<label>Ilość ciosów: <input name="count2" size="4" value="${unit/count2}"/></label>
+		<label>Siła: <input name="str2" size="8" value="${unit/str2}"/></label>
+		<label>Trafienie: <input name="atk2" size="8" value="${unit/atk2}"/></label>
+		<br/>
+		<label>Własność specjalna: <select name="sp2_type">
+			<option value="" tal:attributes="selected not:unit/sp2_type">&lt;brak&gt;</option>
+			<option tal:repeat="item attackSpecials" tal:attributes=" value repeat/item/key; selected php:unit.sp2_type == repeat.item.key">${item}</option>
+		</select></label>
+		<label>Wartość: <input name="sp2_param" size="8" value="${unit/sp2_param}"/></label>
+	</td>
+</tr>
+
+<tr>
+	<td colspan="2"><hr/></td>
+</tr>
+
+<tr>
+	<th>Obrona</th>
+	<td>
+		<label>Obrona fizyczna: <input name="pdef" size="8" value="${unit/pdef}"/></label>
+		<label>Odporność fizyczna: <input name="pres" size="8" value="${unit/pres}"/></label>
+		<br/>
+		<label>Obrona magiczna: <input name="mdef" size="8" value="${unit/mdef}"/></label>
+		<label>Odporność magiczna: <input name="mres" size="8" value="${unit/mres}"/></label>
+	</td>
+</tr>
+
+<tr>
+	<th>Pancerz</th>
+	<td>
+		<label>Pancerz: <input name="armor" size="8" value="${unit/armor}"/></label>
+		<label>Własność specjalna: <select name="armor_sp_type">
+			<option value="" tal:attributes="selected not:unit/armor_sp_type">&lt;brak&gt;</option>
+			<option tal:repeat="item armorSpecials" tal:attributes=" value repeat/item/key; selected php:unit.armor_sp_type == repeat.item.key">${item}</option>
+		</select></label>
+		<label>Wartość: <input name="armor_sp_param" size="8" value="${unit/armor_sp_param}"/></label>
+	</td>
+</tr>
+
+<tr>
+	<th>Zdrowie</th>
+	<td>
+		<label>Zdrowie: <input name="health_max" size="12" value="${unit/health_max}"/></label>
+		<label>Szybkość: <input name="speed" size="8" value="${unit/speed}"/></label>
+		<label>Regeneracja: <input name="regen" size="12" value="${unit/regen}"/></label>
+		<i>Punkty zdrowia na turę.</i>
+	</td>
+</tr>
+
+<tr>
+	<td colspan="2"><hr/></td>
+</tr>
+
+<tr>
+<th></th>
+<td>
+	<button type="reset">cofnij</button>
+	<button>zapisz</button>
+	<a href="combat-units">wróć do listy</a>
+</td>
+<td></td>
+</tr>
+
+</table>
+</fieldset>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

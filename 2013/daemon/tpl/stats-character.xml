@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+
+<tal:block metal:use-macro="macros.xml/menuBar" define="options menu"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<p tal:condition="not:character">Wybrana postać nie istnieje.</p>
+
+<section tal:condition="character" class="multicols">
+
+	<section>
+
+		<table>
+		<tr tal:condition="character/show_player"><th>Gracz</th><td>${character/player_name}</td></tr>
+		<tr><th>Postać</th><td>${character/name}</td></tr>
+		<tr><th>Data narodzin</th><td>${character/date_created}</td></tr>
+		<tr><th>Płeć</th><td>${genderName}</td></tr>
+		<tr><th>Poziom</th><td>${character/level}</td></tr>
+		<tr><th>Doświadczenie</th><td>${character/xp_used}</td></tr>
+		<tr>
+			<th>Frakcja</th>
+			<td tal:condition="not:character/faction_name"><i>brak</i></td>
+			<td tal:condition="character/faction_name">${character/faction_name}</td>
+		</tr>
+		<tr tal:condition="character/rank_name">
+			<th>Ranga</th>
+			<td>${character/rank_name} (${character/rank_id})</td>
+		</tr>
+		<tr>
+			<th>Klan</th>
+			<td tal:condition="not:character/clan_name"><i>brak</i></td>
+			<td tal:condition="character/clan_name">
+				<a href="stats-clans?view=${character/clan_id}">${character/clan_name}</a>
+			</td>
+		</tr>
+		<tr><th>Pojedynki</th><td><a href="stats-duels?char=${characterId}">pokaż pojedynki postaci</a></td></tr>
+		<tr tal:condition="mailUrl"><th>Kontakt</th><td><a tal:attributes="href mailUrl">wyślij wiadomość</a></td></tr>
+		<tr tal:condition="character/titles"><th>Tytuły</th><td>${character/titles}</td></tr>
+		<tr tal:condition="character/quote"><th>Motto</th><td><q>${character/quote}</q></td></tr>
+		</table>
+
+		<table tal:condition="character/statistics" tal:define="s character/statistics">
+		<caption>Statystyki</caption>
+		<tr><th>Wykonane misje</th><td>${s/missions}</td></tr>
+		<tr><th>Wygrane pojedynki</th><td>${s/duel_wins}</td></tr>
+		<tr><th>Przegrane pojedynki</th><td>${s/duel_losses}</td></tr>
+		<tr><th>Pokonane słabe potwory</th><td>${s/kills_mob1}</td></tr>
+		<tr><th>Pokonane średnie potwory</th><td>${s/kills_mob2}</td></tr>
+		<tr><th>Pokonane silne potwory</th><td>${s/kills_mob3}</td></tr>
+		<tr><th>Pokonane potwory epickie</th><td>${s/kills_mob4}</td></tr>
+		</table>
+
+	</section>
+
+	<section tal:condition="character/avatar_url | character/description">
+		<p tal:condition="character/avatar_url" class="avatar">
+			<img src="${character/avatar_url}" alt="${character/avatar_url}"/>
+		</p>
+		<p tal:content="structure character/description"/>
+	</section>
+
+</section>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

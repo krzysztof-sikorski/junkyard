@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form action="" method="post">
+<fieldset>
+<legend>Armageddon</legend>
+
+<button name="reset" value="characters">postacie</button>
+<i>Kasuje większość statów postaci, zachowuje jedynie imiona, płeć itp.</i>
+<br/>
+<button name="reset" value="history">historia</button>
+<i>Czyści pocztę, ogłoszenia oraz historię przeliczeń i pojedynków.</i>
+
+</fieldset>
+</form>
+
+
+<form action="" method="post">
+<fieldset>
+<legend>Przeliczenia statów</legend>
+
+<i>Wszystkie operacje są czasochłonne, nie odpalać zbyt często...</i>
+<br/>
+<button name="reset" value="items">przedmioty</button>
+<i>Masowo waliduje przedmioty i uaktualnia wycenę.</i>
+
+</fieldset>
+</form>
+
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

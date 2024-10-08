@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form action="" method="post">
+<fieldset>
+<legend>Arena</legend>
+
+Tryb:
+<label><input type="radio" name="mode" value="" tal:attributes="checked not:selectMode"/> potwór vs potwór</label>
+<label><input type="radio" name="mode" value="pve" tal:attributes="checked php:selectMode eq 'pve'"/> postać vs potwór</label>
+<label><input type="radio" name="mode" value="pvp" tal:attributes="checked php:selectMode eq 'pvp'"/> postać vs postać</label>
+<button type="submit">Przełącz</button>
+<br/>
+
+<select name="unitA" size="16" tal:condition="selectMode">
+	<option tal:repeat="row unitsC" tal:attributes="value row/combat_unit_id; selected php: unitIdA == row['combat_unit_id']">${row/name}</option>
+</select>
+<select name="unitA" size="16" tal:condition="not:selectMode">
+	<option tal:repeat="row unitsM" tal:attributes="value row/combat_unit_id; selected php: unitIdA == row['combat_unit_id']">&lt;${row/combat_unit_id}&gt; ${row/name}</option>
+</select>
+
+<abbr title="versus">VS</abbr>
+
+<select name="unitB" size="16" tal:condition="php:selectMode ne 'pvp'">
+	<option tal:repeat="row unitsM" tal:attributes="value row/combat_unit_id; selected php: unitIdB == row['combat_unit_id']">&lt;${row/combat_unit_id}&gt; ${row/name}</option>
+</select>
+<select name="unitB" size="16" tal:condition="php:selectMode eq 'pvp'">
+	<option tal:repeat="row unitsC" tal:attributes="value row/combat_unit_id; selected php: unitIdB == row['combat_unit_id']">${row/name}</option>
+</select>
+
+<br/>
+
+<button name="attack">FIGHT!</button>
+<label>Ilość: <input name="n" value="${combatCount}" size="4"/></label>
+
+</fieldset>
+</form>
+
+<table class="border">
+<tr>
+	<th rowspan="2">Win A</th>
+	<th rowspan="2">Win B</th>
+	<th rowspan="2">Remis</th>
+	<th rowspan="2">2xKO</th>
+	<th colspan="3">Zdrowie A</th>
+	<th colspan="3">Zdrowie B</th>
+</tr>
+<tr>
+	<th>AVG</th>
+	<th>MIN</th>
+	<th>MAX</th>
+	<th>AVG</th>
+	<th>MIN</th>
+	<th>MAX</th>
+</tr>
+<tr>
+	<td>${winsA}%</td>
+	<td>${winsB}%</td>
+	<td>${draws}%</td>
+	<td>${doubleKOs}%</td>
+	<td>${healthSumA}%</td>
+	<td>${healthMinA}%</td>
+	<td>${healthMaxA}%</td>
+	<td>${healthSumB}%</td>
+	<td>${healthMinB}%</td>
+	<td>${healthMaxB}%</td>
+</tr>
+</table>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>
