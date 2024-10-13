@@ -1,0 +1,16 @@
+{
+  "babel": {},
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/eslint-parser": "^7.21.3",
+    "eslint": "^8.36.0",
+    "request": "^2.88.2",
+    "web-ext": "^7.5.0"
+  },
+  "webExt": {
+    "ignoreFiles": [
+      "package.json",
+      "package-lock.json"
+    ]
+  }
+}

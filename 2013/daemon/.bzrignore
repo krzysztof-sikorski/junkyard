@@ -1,0 +1,6 @@
+./cfg/*
+./log/*
+./tmp/*
+./lib/PHPTAL*
+./public/google*
+./public/scyzoryk/.htaccess

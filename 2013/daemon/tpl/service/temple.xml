@@ -1,0 +1,83 @@
+<p>
+	Zdrowie: <b>${characterData/health} / ${characterData/health_max}</b>,
+	mana: <b>${characterData/mana} / ${characterData/mana_max}</b>.
+	<tal:block condition="not:bankEnabled">
+		W sakiewce masz <b>${characterData/gold_purse}</b> sztuk złota.
+	</tal:block>
+	<tal:block condition="bankEnabled">
+		Na koncie masz <b>${characterData/gold_bank}</b> sztuk złota,
+		w sakiewce <b>${characterData/gold_purse}</b> sztuk złota.
+		Możesz zapłacić przelewem.
+	</tal:block>
+</p>
+
+<section tal:condition="itemsToBind">
+<h1>Przypisanie</h1>
+<form action="" method="post">
+<p>
+	<select name="bind" size="10">
+		<optgroup tal:condition="exists:itemsToBind/equipment" label="Założone">
+			<option tal:repeat="row itemsToBind/equipment" value="${repeat/row/key}">
+				[${row/value} zł] ${row/name}
+				<tal:block condition="exists:row/flags/identified">(zident.)</tal:block>
+			</option>
+		</optgroup>
+		<optgroup tal:condition="exists:itemsToBind/inventory" label="Plecak">
+			<option tal:repeat="row itemsToBind/inventory" value="${repeat/row/key}">
+				[${row/value} zł] ${row/name}
+				<tal:block condition="exists:row/flags/identified">(zident.)</tal:block>
+			</option>
+		</optgroup>
+		<optgroup tal:condition="exists:itemsToBind/storage" label="Schowek">
+			<option tal:repeat="row itemsToBind/storage" value="${repeat/row/key}">
+				[${row/value} zł] ${row/name}
+				<tal:block condition="exists:row/flags/identified">(zident.)</tal:block>
+			</option>
+		</optgroup>
+	</select>
+	<br/>
+	<button>przypisz</button>
+	<i>Połącz przedmiot ze swoją duszą aby nie tracić go po śmierci...</i>
+</p>
+</form>
+</section>
+
+<section>
+<h1>Ołtarz ofiarny</h1>
+<form action="" method="post">
+<p>
+	<select tal:condition="itemsToOffer" name="offer">
+		<option value="" selected=""></option>
+		<optgroup tal:condition="exists:itemsToOffer/inventory" label="Plecak">
+			<option tal:repeat="row itemsToOffer/inventory" value="${repeat/row/key}">
+				[${row/value} zł] ${row/name}
+				<tal:block condition="exists:row/flags/bound">(przypisany)</tal:block>
+				<tal:block condition="exists:row/flags/identified">(zident.)</tal:block>
+			</option>
+		</optgroup>
+		<optgroup tal:condition="exists:itemsToOffer/storage" label="Schowek">
+			<option tal:repeat="row itemsToOffer/storage" value="${repeat/row/key}">
+				[${row/value} zł] ${row/name}
+				<tal:block condition="exists:row/flags/bound">(przypisany)</tal:block>
+				<tal:block condition="exists:row/flags/identified">(zident.)</tal:block>
+			</option>
+		</optgroup>
+	</select>
+	<label>Złoto: <input name="pray" value="" size="16"/></label>
+	<button>złóż ofiarę</button>
+	<br/>
+	<i>Możesz otrzymać misję lub uzdrowienie. Pamiętaj: bogowie lubią hojnych...</i>
+</p>
+</form>
+</section>
+
+<form tal:condition="lastMission" action="" method="post">
+<p>
+Obecna misja to <q>${lastMission/_name}</q>,
+otrzymana w świątyni <b tal:content="lastMission/service_name | default">???</b>
+w przeliczeniu nr <b>${lastMission/rollover_id}</b>.
+<br/>
+<button name="giveUp" value="1">porzuć misję</button>
+<i>Nie dostaniesz nowej misji w tym samym przeliczeniu.</i>
+</p>
+</form>
