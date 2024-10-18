@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form tal:condition="title" action="" method="post">
+<fieldset>
+<legend>Dane tytułu</legend>
+<table>
+
+<tr>
+<th>ID</th>
+<td>
+	<input name="id" size="32" value="${title/title_id}"/>
+	<i>Zmień by utworzyć kopię.</i>
+</td>
+</tr>
+
+<tr>
+<th>Forma żeńska</th>
+<td>
+	<input name="name_f" size="48" value="${title/name_f}"/>
+</td>
+</tr>
+
+<tr>
+<th>Forma męska</th>
+<td>
+	<input name="name_m" size="48" value="${title/name_m}"/>
+</td>
+</tr>
+
+<tr>
+<th>Forma nijaka</th>
+<td>
+	<input name="name_n" size="48" value="${title/name_n}"/>
+</td>
+</tr>
+
+<tr>
+<th>Typ</th>
+<td>
+	<label><input type="radio" name="type" value="normal" tal:attributes="checked php:title.type eq 'normal'"/> normalny</label>
+	<label><input type="radio" name="type" value="special" tal:attributes="checked php:title.type eq 'special'"/> specjalny</label>
+	<i>Tytuły specjalne nie są kasowane przy resecie postaci.</i>
+</td>
+</tr>
+
+<tr>
+<th></th>
+<td>
+	<button type="reset">cofnij</button>
+	<button>zapisz</button>
+	<a href="titles">wróć do listy</a>
+</td>
+<td></td>
+</tr>
+
+</table>
+</fieldset>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

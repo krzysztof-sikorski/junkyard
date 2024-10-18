@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<p tal:condition="not:rolloversEnabled">
+	Wojna dobiegła końca, nie słyszysz już jej zewu. A może nigdy się nie rozpoczęła?
+	<br/>Nieważne, nie dbasz już o to. Powoli, nieubłaganie zanurzasz się z powrotem w sen...
+</p>
+
+<tal:block condition="rolloversEnabled">
+
+	<p>
+	Złe czasy nadeszły dla starożytnego cesarstwa Xin.<br/>
+	Nie dość że niedawno musiało odeprzeć najazd barbarzyńców i kilkuletnie oblężenie Wielkiego Muru,<br/>
+	nie dość że chłopi raz jeszcze zrobili powstanie buntując się przeciwko podatkom i świętej władzy Cesarza,<br/>
+	nie dość że wszelkiej maści wywrotowcy zjednoczyli się ostatnio pod wspólnym sztandarem,<br/>
+	tworząc samozwańczą <q>Armię Czerwonej Gwiazdy</q> i grożąc obaleniem Stolicy<br/>
+	- to jeszcze astrologowie kraczą o przepowiedni wielkiej wojny i powrotu <i>daemonów</i><br/>
+	a jakiś głupiec uwolnił Nekromantę i horda nieumarłych rośnie właśnie w siłę na wschodzie grożąc zagładą wszystkiego co żywe...<br/>
+	Zaiste, rację ma pradawne przekleństwo: Obyś żył w ciekawych czasach...
+	</p>
+
+	<form tal:condition="firstOne" action="" method="post">
+	<p><button tal:repeat="item respawns" name="respawn" value="${repeat/item/key}">przebudzenie</button></p>
+	</form>
+
+	<form tal:condition="not:firstOne" action="" method="post">
+	<p tal:condition="respawns">
+		Odrodzenie: <button tal:repeat="item respawns" name="respawn" value="${repeat/item/key}">${item}</button>
+	</p>
+	</form>
+
+</tal:block>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

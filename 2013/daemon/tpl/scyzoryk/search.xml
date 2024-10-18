@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+
+<form action="" method="post">
+<p>
+<label>ID: <input name="id" value="${inputId}"/></label>
+<label>Nazwa: <input name="name" value="${inputName}"/></label>
+<button>szukaj</button>
+</p>
+</form>
+
+<table tal:condition="results">
+<tr>
+	<th>ID</th><th>Nazwa</th><td></td>
+</tr>
+<tr tal:repeat="row results">
+	<td>${row/id}</td><td>${row/name}</td>
+	<td><input type="button" value="wybierz" data-search-result="${row/id}"/></td>
+</tr>
+</table>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

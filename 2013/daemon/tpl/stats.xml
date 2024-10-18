@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+
+<tal:block metal:use-macro="macros.xml/menuBar" define="options menu"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<table>
+<tr><th>Logowanie</th><td tal:condition="loginEnabled">dostępne</td><td tal:condition="not:loginEnabled">wyłączone</td></tr>
+<tr><th>Rejestracja</th><td tal:condition="registerEnabled">dostępna</td><td tal:condition="not:registerEnabled">wyłączona</td></tr>
+<tr><th>Przeliczenia</th><td tal:condition="rolloversEnabled">włączone</td><td tal:condition="not:rolloversEnabled">wyłączone</td></tr>
+<tr><th>Limit tur</th><td>${turnLimit}</td></tr>
+<tr><th>Przyrost tur</th><td>${turnDelta} dziennie</td></tr>
+<tr><th>Oblegane caerny</th><td tal:content="caernSieges | default"><i>brak</i></td></tr>
+</table>
+
+<table class="border">
+<caption>Frakcje</caption>
+<tr>
+	<th>ID</th>
+	<th>Nazwa</th>
+	<th>Siła</th>
+	<th>Mnożnik</th>
+	<th>Członkowie</th>
+	<th>Posiadane caerny</th>
+</tr>
+<tr tal:repeat="row factions">
+	<td>${repeat/row/key}</td>
+	<td>${row/name}</td>
+	<td>${row/power}</td>
+	<td>${row/powerMult}%</td>
+	<td>${row/chars}</td>
+	<td tal:content="row/caerns | default"><i>brak</i></td>
+</tr>
+</table>
+
+<table class="border">
+<caption>Ostatnie przeliczenia</caption>
+<tr>
+	<th>Nr</th>
+	<th>Data</th>
+	<th>Gracze</th>
+	<th>Postacie</th>
+	<th>Klany</th>
+	<th>Bitwy</th>
+</tr>
+<tr tal:repeat="row rollovers">
+	<td>${row/rollover_id}</td>
+	<td>${row/date_added}</td>
+	<td>${row/players_total}</td>
+	<td>${row/characters_total}</td>
+	<td>${row/clans_total}</td>
+	<td tal:condition="row/_battles">
+		<tal:block repeat="x row/_battles">
+			<a href="stats-battles?view=${repeat/x/key}">${x}</a>
+			<br tal:condition="not:repeat/x/end"/>
+		</tal:block>
+	</td>
+	<td tal:condition="not:row/_battles"><i>brak</i></td>
+</tr>
+</table>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

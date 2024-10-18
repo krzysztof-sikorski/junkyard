@@ -1,0 +1,46 @@
+<form action="" method="post">
+<p>
+	<label>Nazwa potwora: <input name="target" value="${target}" size="32"/></label>
+	<button name="cast" value="${spellId}">rzuć zaklęcie (${cost} MP)</button>
+</p>
+</form>
+
+<tal:block condition="result">
+
+<h2>${result/monster/name}</h2>
+<table style="margin-bottom:1em">
+<tr>
+	<th>Klasa</th>
+	<td>${result/className}</td>
+</tr>
+<tr>
+	<th>Poziom</th>
+	<td>${result/monster/level}</td>
+</tr>
+<tr>
+	<th>Zdrowie</th>
+	<td>${result/unit/health_max}</td>
+</tr>
+<tal:block define="combatStats result/unit" metal:use-macro="macros.xml/combatStats"/>
+<tr>
+	<th>Złoto</th>
+	<td>${result/monster/gold}</td>
+</tr>
+<tr>
+	<th>Szansa na przedmiot</th>
+	<td>${result/monster/chance1} / ${result/monster/chance2}</td>
+</tr>
+<tr>
+	<th>Tytuł</th>
+	<td tal:condition="result/title">${result/title/name_f} / ${result/title/name_m} / ${result/title/name_n}</td>
+	<td tal:condition="not:result/title"><i>brak</i></td>
+</tr>
+</table>
+
+<h2>Przedmioty</h2>
+<p tal:condition="not:result/items"><i>brak</i></p>
+<p tal:condition="result/items">${result/items}.</p>
+<h2>Występowanie</h2>
+<p tal:condition="not:result/locations"><i>brak</i></p>
+<p tal:condition="result/locations">${result/locations}.</p>
+</tal:block>

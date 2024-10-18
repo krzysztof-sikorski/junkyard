@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form action="" method="post">
+<fieldset>
+<legend>Nowy przedmiot</legend>
+<label>ID: <input name="newId"/></label>
+<label>Nazwa: <input name="newName"/></label>
+<label>Typ:
+	<select name="newType">
+	<option value="" selected="selected"></option>
+	<option tal:repeat="item itemTypes" tal:attributes=" value repeat/item/key">${item}</option>
+	</select>
+</label>
+<button>dodaj</button>
+</fieldset>
+</form>
+
+<form action="" method="post">
+<p>
+<label>ID: <input name="filter[id]" value="${filter/id}"/></label>
+<label>Nazwa: <input name="filter[name]" value="${filter/name}"/></label>
+<label>Typ:
+	<select name="filter[type]">
+	<option value="" tal:attributes="selected not:filter/type">&lt;wszystkie&gt;</option>
+	<option tal:repeat="item itemTypes" tal:attributes=" value repeat/item/key; selected php:filter.type == repeat.item.key">${item}</option>
+	</select>
+</label>
+<button>szukaj</button>
+</p>
+</form>
+
+<form action="" method="post" tal:condition="items">
+<table class="border">
+<thead>
+<tr>
+	<th rowspan="2">ID</th>
+	<th rowspan="2">Nazwa</th>
+	<th rowspan="2">Typ</th>
+	<th rowspan="2">Wartość</th>
+	<th rowspan="2" colspan="2">
+		<button>usuń zaznaczone</button>
+	</th>
+	<th colspan="2">Staty</th>
+</tr>
+<tr>
+	<th>Wycena</th>
+	<th>Wartości</th>
+</tr>
+</thead>
+<tbody>
+<tr tal:repeat="item items">
+	<td>${item/item_id}</td>
+	<td>${item/name}</td>
+	<td>${item/type} <tal:block condition="item/damage_type">(${item/damage_type})</tal:block></td>
+	<td>${item/value}</td>
+	<td><a href="item-edit?id=${item/item_id}">edytuj</a></td>
+	<td><label><input type="checkbox" name="del[]" value="${item/item_id}"/> usuń</label></td>
+	<td>${item/suggested_value}</td>
+	<td>
+	${item/pstr_p} ${item/pstr_c} ${item/patk_p} ${item/patk_c} /
+	${item/pdef_p} ${item/pdef_c} ${item/pres_p} ${item/pres_c} /
+	${item/mstr_p} ${item/mstr_c} ${item/matk_p} ${item/matk_c} /
+	${item/mdef_p} ${item/mdef_c} ${item/mres_p} ${item/mres_c} /
+	${item/armor} ${item/speed} ${item/regen} / ${item/special_type} ${item/special_param}
+	</td>
+</tr>
+</tbody>
+</table>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

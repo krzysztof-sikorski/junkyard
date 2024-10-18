@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form action="" method="post">
+<table class="border">
+
+<tr>
+<th>Stronicowanie</th>
+<td>
+	<input name="cfg[listLimitStatistics]" value="${cfg/listLimitStatistics}" size="6"/> ilość pozycji na stronach statystyk<br/>
+	<input name="cfg[listLimitMessages]" value="${cfg/listLimitMessages}" size="6"/> ilość pozycji na stronie poczty lub ogłoszeń<br/>
+	<input name="cfg[listLimitCharacters]" value="${cfg/listLimitCharacters}" size="6"/> ilość postaci na liście w otoczeniu
+</td>
+</tr>
+
+<tr>
+<th>Logowanie</th>
+<td>
+	<label><input type="radio" name="cfg[loginEnabled]" tal:attributes="value string:1; checked cfg/loginEnabled"/> dostępne</label>
+	<label><input type="radio" name="cfg[loginEnabled]" tal:attributes="value string:0; checked not:cfg/loginEnabled"/> wyłączone</label>
+</td>
+</tr>
+
+<tr>
+<th>Rejestracja</th>
+<td>
+	<label><input type="radio" name="cfg[registerEnabled]" tal:attributes="value string:1; checked cfg/registerEnabled"/> dostępna</label>
+	<label><input type="radio" name="cfg[registerEnabled]" tal:attributes="value string:0; checked not:cfg/registerEnabled"/> wyłączona</label>
+</td>
+</tr>
+
+<tr>
+<th>Przeliczenia</th>
+<td>
+	<label><input type="radio" name="cfg[rolloversEnabled]" tal:attributes="value string:1; checked cfg/rolloversEnabled"/> włączone</label>
+	<label><input type="radio" name="cfg[rolloversEnabled]" tal:attributes="value string:0; checked not:cfg/rolloversEnabled"/> wyłączone</label>
+</td>
+</tr>
+
+<tr>
+<th>Endgame</th>
+<td>
+	<label><input type="radio" name="cfg[endgame]" tal:attributes="value string:1; checked cfg/endgame"/> włączone</label>
+	<label><input type="radio" name="cfg[endgame]" tal:attributes="value string:0; checked not:cfg/endgame"/> wyłączone</label>
+</td>
+</tr>
+
+<tr>
+<th>Tury</th>
+<td>
+	<label>Limit: <input name="cfg[turnLimit]" value="${cfg/turnLimit}"/></label>
+	<label>Przyrost: <input name="cfg[turnDelta]" value="${cfg/turnDelta}"/></label>
+</td>
+</tr>
+
+<tr>
+<th>Lokacja startowa</th>
+<td>
+	<input name="cfg[defaultRespawn]" value="${cfg/defaultRespawn}"/>
+	<i>Domyślny respawn dla świeżo założonej postaci.</i>
+</td>
+</tr>
+
+<tr>
+<th>Uzdrowiciel</th>
+<td>
+	Zdrowie: <input name="healer[0]" value="${healer/0}" size="6"/>
+	- <input name="healer[1]" value="${healer/1}" size="6"/>
+	Mana: <input name="healer[2]" value="${healer/2}" size="6"/>
+	- <input name="healer[3]" value="${healer/3}" size="6"/>
+	<i>Ile ma leczyć za 1 złota.</i>
+</td>
+</tr>
+
+<tr>
+	<th>Misje w świątyni</th>
+	<td>
+		<input name="cfg[templeXpForMission]" value="${cfg/templeXpForMission}" size="8"/> minimalny EXP gracza
+		<input name="cfg[templeXpForRegen]" value="${cfg/templeXpForRegen}" size="8"/> minimalny EXP dla regeneracji
+	</td>
+</tr>
+
+<tr>
+	<th>Frakcje</th>
+	<td>
+		<input name="cfg[factionDecay]" value="${cfg/factionDecay}" size="8"/> mnożnik spadku siły frakcji<br/>
+	</td>
+</tr>
+
+<tr>
+	<th>Aktywacja endgame</th>
+	<td>
+		<input name="cfg[bossUnlockLevel]" value="${cfg/bossUnlockLevel}" size="6"/> minimalny poziom postaci
+		<input name="cfg[bossUnlockRank]" value="${cfg/bossUnlockRank}" size="6"/> minimalna ranga postaci
+	</td>
+</tr>
+
+<tr>
+	<th>Komunikat globalny</th>
+	<td>
+		<textarea name="cfg[globalMessage]" rows="5" cols="80">${cfg/globalMessage}</textarea>
+	</td>
+</tr>
+
+<tr>
+	<th>Generator</th>
+	<td>
+		<a href="config-generator">ustawienia generatora</a>
+	</td>
+</tr>
+
+<tr>
+	<th></th>
+	<td>
+		<button>zapisz</button>
+	</td>
+</tr>
+
+</table>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>
