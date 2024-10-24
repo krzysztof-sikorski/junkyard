@@ -1,0 +1,11 @@
+[data/**] # binary files
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+indent_style = unset
+indent_size = unset
+max_line_length = unset
+
+[Makefile]
+max_line_length = 140

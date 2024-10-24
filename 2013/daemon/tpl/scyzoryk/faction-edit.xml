@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form tal:condition="faction" action="" method="post">
+<fieldset>
+<legend>Dane frakcji</legend>
+<table>
+
+<tr>
+<th>ID</th>
+<td>
+	<input name="id" size="32" value="${faction/faction_id}"/>
+	<i>Zmień by utworzyć kopię.</i>
+</td>
+</tr>
+
+<tr>
+<th>Nazwa</th>
+<td>
+	<input name="name" size="48" value="${faction/name}"/>
+</td>
+</tr>
+
+<tr>
+<th>Potęga</th>
+<td>
+	<input name="power" size="4" value="${faction/power}"/>
+</td>
+</tr>
+
+<tr>
+<th></th>
+<td>
+	<button type="reset">cofnij</button>
+	<button>zapisz</button>
+	<a href="factions">wróć do listy</a>
+</td>
+</tr>
+
+</table>
+</fieldset>
+</form>
+
+<h2>Rangi</h2>
+
+<form action="" method="post">
+<fieldset>
+<legend>Nowa ranga</legend>
+<label>Numer: <input name="id" value="" size="4"/></label>
+<label>Wymagane punkty: <input name="min_points" value="" size="8"/></label>
+<button name="addRank" value="1">dodaj</button><br/>
+<label>
+	Tytuł: <select name="title_id">
+	<option value="" selected="">&lt;brak&gt;</option>
+	<option tal:repeat="item titles" value="${item/title_id}">&lt;${item/title_id}&gt; ${item/name_f} / ${item/name_m} / ${item/name_n}</option>
+	</select>
+</label>
+</fieldset>
+</form>
+
+<form action="" method="post" tal:condition="factionRanks">
+<table class="border">
+<thead>
+<tr>
+	<th>Numer</th>
+	<th><abbr title="Wymagane punkty">Punkty</abbr></th>
+	<th>Tytuł</th>
+	<th>
+		<button>usuń zaznaczone</button>
+	</th>
+</tr>
+</thead>
+<tbody>
+<tr tal:repeat="item factionRanks">
+	<td>${item/rank_id}</td>
+	<td>${item/min_points}</td>
+	<td>${item/name_f} / ${item/name_m} / ${item/name_n}</td>
+	<td><label><input type="checkbox" name="del[]" value="${item/rank_id}"/> usuń</label></td>
+</tr>
+</tbody>
+</table>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

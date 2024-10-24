@@ -1,0 +1,47 @@
+<section>
+<form action="" method="post">
+	<h1>Konto</h1>
+	<p>
+		Na koncie masz <b>${goldBank}</b> sztuk złota,
+		w sakiewce <b>${goldPurse}</b> sztuk złota.
+	</p>
+	<p>
+		<label>Podejmij: <input name="getGold" value=""/></label>
+		<label>Wpłać: <input name="putGold" value=""/></label>
+		<button>wykonaj</button>
+	</p>
+</form>
+</section>
+
+<section>
+<h1>Schowek</h1>
+<p tal:condition="not:storage">Twój schowek jest pusty.</p>
+<form tal:condition="storage" action="" method="post">
+	<p>
+		<select name="getItem" size="${storageLimit}">
+			<option tal:repeat="row storage" value="${row/inventory_id}">
+				${row/item/name} <tal:block condition="exists:row/flags/bound">(przypisany)</tal:block>
+			</option>
+		</select>
+		<button>wyjmij</button>
+	</p>
+</form>
+</section>
+
+<section>
+<h1>Plecak</h1>
+<p tal:condition="storageFull">Twój schowek jest pełny.</p>
+<tal:block condition="not:storageFull">
+	<p tal:condition="not:inventory">Nie masz co schować.</p>
+	<form tal:condition="inventory" action="" method="post">
+		<p>
+			<select name="putItem" size="10">
+				<option tal:repeat="row inventory" value="${row/inventory_id}">
+					${row/item/name} <tal:block condition="exists:row/flags/bound">(przypisany)</tal:block>
+				</option>
+			</select>
+			<button>schowaj</button>
+		</p>
+	</form>
+</tal:block>
+</section>

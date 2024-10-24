@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<form action="" method="post">
+<fieldset>
+<legend>Ustawienia konta</legend>
+
+<label>Imię gracza: <input name="name" size="32" value="${player/name}"/></label>
+<i>Do wyświetlania w profilu postaci.</i>
+<br/>
+<label>Nowe hasło: <input name="pass1" type="password" autocomplete="off" size="32"/></label>
+<label>Powtórz hasło: <input name="pass2" type="password" autocomplete="off" size="32"/></label>
+<i>Wypełnij tylko jeśli zmieniasz hasło.</i>
+<br/>
+Styl strony:
+<label tal:repeat="skin skins">
+	<input type="radio" name="skin" value="${skin}" tal:attributes="checked php:skin==player.skin"/>${skin}
+</label>
+<br/>
+Email: <input name="email" value="${player/email}" size="64"/>
+<i>Do przypominania hasła, nie wyświetlany w grze.</i>
+<br/>
+<button>zapisz</button>
+</fieldset>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

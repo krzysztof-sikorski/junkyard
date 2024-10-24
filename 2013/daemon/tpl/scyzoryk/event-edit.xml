@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form tal:condition="editObj" action="" method="post">
+<fieldset>
+<legend>Dane zdarzenia</legend>
+<table>
+
+<tr>
+<th>Zapisz jako ID</th>
+<td>
+	<input name="event_id" size="32" value="${editObj/event_id}"/>
+	<i>Zmień by utworzyć kopię.</i>
+</td>
+</tr>
+
+<tr>
+<th>Nazwa</th>
+<td>
+	<input name="name" size="48" value="${editObj/name}"/>
+	<i>Wyświetlana w Badaniu Terenu itp.</i>
+</td>
+</tr>
+
+<tr>
+<th>Skrypt</th>
+<td>
+	<input name="handle" size="32" value="${editObj/handle}"/>
+	<i>Nazwa skryptu do wykonania.</i>
+</td>
+</tr>
+
+<tr>
+<th>Notatki</th>
+<td>
+	<textarea name="description" cols="100" rows="5">${editObj/description}</textarea>
+	<br/><i>Ściągawka, nie wyświetlana nigdzie w grze.</i>
+</td>
+</tr>
+
+<tr>
+<th></th>
+<td>
+	<button type="reset">cofnij</button>
+	<button>zapisz</button>
+	<a href="events">wróć do listy</a>
+</td>
+<td></td>
+</tr>
+
+</table>
+</fieldset>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

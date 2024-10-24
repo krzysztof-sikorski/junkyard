@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body class="center">
+
+<h1><img src="static/biglogo.jpg" alt="Daemon 2"/></h1>
+
+<form action="auth" method="post" tal:condition="loginEnabled">
+<fieldset class="login">
+<legend>Logowanie</legend>
+<label>Login: <input name="login" autofocus="autofocus"/></label>
+<label>Hasło: <input name="pass" type="password"/></label>
+<button>zaloguj</button>
+<br/>
+<a href="reset-password">nie pamiętasz hasła?</a>
+</fieldset>
+</form>
+
+<ul class="menu">
+<li><a href="register">Rejestracja</a></li>
+<li><a href="rules" rel="license">Regulamin</a></li>
+<li><a href="stats">Statystyki</a></li>
+<li><a href="http://pl.daemon.wikia.com/wiki/Daemon_Wiki">Pomoc</a></li>
+<li><a href="news" rel="feed">News</a></li>
+</ul>
+
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<p><i>Daemon</i> to turowa gra w klimatach fantasy, rozgrywana za pomocą przeglądarki internetowej.</p>
+<p>Zostań <i>daemonem</i>, nadludzką istotą wędrującą po świecie w poszukiwaniu potęgi, bogactwa i sławy.<br/>
+W swoich podróżach napotkasz potwory (które możesz zabić) oraz postacie innych graczy (które możesz zabić).<br/>
+Mamy także wewnętrzy czat i pocztę, jeśli potrzebujesz innych niż agresja form komunikacji.</p>
+
+<p>Starsze wersje przeglądarki Internet Explorer <b>nie są</b> obsługiwane.</p>
+
+<p>Pomysł i pierwsze ery: <a href="http://jingizu.netcity.pl/" rel="author external">Jingizu</a>.<br/>
+Kontynuacja: <a href="http://blog.monku.pl/" rel="author external">Monku</a>.<br/>
+Obecna edycja: <b>anfurious</b> &amp; <a href="http://silentmind.net/" rel="author">radical dreamer</a>.</p>
+
+<tal:block condition="news">
+<h2>Najnowsze wieści</h2>
+<ul class="news">
+<li tal:repeat="item news">${item/published} <tal:block content="structure item/content"></tal:block></li>
+</ul>
+</tal:block>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<section class="multicols">
+
+	<form action="" method="post" class="pretty" style="border-style:none">
+	<fieldset>
+	<legend>Ustawienia postaci</legend>
+	<ul>
+		<li>
+			<input type="checkbox" id="player" name="player" tal:attributes="checked character/show_player"/>
+			<label for="player">wyświetlaj imię gracza (jeśli ustawione w profilu)</label>
+		</li>
+		<li>
+			<label for="avatar">Portret postaci (URL):</label>
+			<input id="avatar" name="avatar" value="${character/avatar_url}" size="64" length="255"/>
+		</li>
+		<li>
+			<label for="quote">Motto:</label>
+			<input name="quote" value="${character/quote}" size="64"/>
+		</li>
+		<li>
+			<label>Opis (dowolne info):</label>
+			<textarea name="desc" cols="64" rows="5">${character/description}</textarea>
+		</li>
+	</ul>
+	<button>zapisz</button>
+	</fieldset>
+	</form>
+
+	<section tal:condition="character/avatar_url | character/description">
+		<p tal:condition="character/avatar_url" class="avatar">
+			<img src="${character/avatar_url}" alt="${character/avatar_url}"/>
+		</p>
+		<p tal:content="structure preview"/>
+	</section>
+
+</section>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

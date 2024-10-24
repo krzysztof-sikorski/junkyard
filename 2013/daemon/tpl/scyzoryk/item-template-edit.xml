@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form tal:condition="editObj" action="" method="post">
+<fieldset>
+<legend>Dane szablonu</legend>
+<table>
+
+<tr>
+<th>ID</th>
+<td>
+	<input name="id" size="32" value="${editObj/id}"/>
+	<i>Zmień by utworzyć kopię.</i>
+</td>
+</tr>
+
+<tr>
+<th>Nazwa</th>
+<td>
+	<input name="name" size="48" value="${editObj/name}"/>
+</td>
+</tr>
+
+<tr>
+<th></th>
+<td>
+	<button type="reset">cofnij</button>
+	<button>zapisz</button>
+	<a href="item-templates">wróć do listy</a>
+</td>
+</tr>
+
+</table>
+
+
+<table class="border">
+<thead>
+	<tr><th rowspan="2">Cecha bojowa</th><th colspan="2">Bonus %</th><th colspan="2">Bonus stały</th></tr>
+	<tr><th>Szansa na +</th><th>Szansa na -</th><th>Szansa na +</th><th>Szansa na -</th></tr>
+</thead>
+<tbody>
+	<tr>
+		<th>Siła fizyczna</th>
+		<td><input name="pstr_p_p" value="${editObj/pstr_p_p}" size="8"/></td>
+		<td><input name="pstr_p_m" value="${editObj/pstr_p_m}" size="8"/></td>
+		<td><input name="pstr_c_p" value="${editObj/pstr_c_p}" size="8"/></td>
+		<td><input name="pstr_c_m" value="${editObj/pstr_c_m}" size="8"/></td>
+	</tr>
+	<tr>
+		<th>Trafienie fizyczne</th>
+		<td><input name="patk_p_p" value="${editObj/patk_p_p}" size="8"/></td>
+		<td><input name="patk_p_m" value="${editObj/patk_p_m}" size="8"/></td>
+		<td><input name="patk_c_p" value="${editObj/patk_c_p}" size="8"/></td>
+		<td><input name="patk_c_m" value="${editObj/patk_c_m}" size="8"/></td>
+	</tr>
+	<tr>
+		<th>Obrona fizyczna</th>
+		<td><input name="pdef_p_p" value="${editObj/pdef_p_p}" size="8"/></td>
+		<td><input name="pdef_p_m" value="${editObj/pdef_p_m}" size="8"/></td>
+		<td><input name="pdef_c_p" value="${editObj/pdef_c_p}" size="8"/></td>
+		<td><input name="pdef_c_m" value="${editObj/pdef_c_m}" size="8"/></td>
+	</tr>
+	<tr>
+		<th>Odporność fizyczna</th>
+		<td><input name="pres_p_p" value="${editObj/pres_p_p}" size="8"/></td>
+		<td><input name="pres_p_m" value="${editObj/pres_p_m}" size="8"/></td>
+		<td><input name="pres_c_p" value="${editObj/pres_c_p}" size="8"/></td>
+		<td><input name="pres_c_m" value="${editObj/pres_c_m}" size="8"/></td>
+	</tr>
+	<tr>
+		<th>Siła magiczna</th>
+		<td><input name="mstr_p_p" value="${editObj/mstr_p_p}" size="8"/></td>
+		<td><input name="mstr_p_m" value="${editObj/mstr_p_m}" size="8"/></td>
+		<td><input name="mstr_c_p" value="${editObj/mstr_c_p}" size="8"/></td>
+		<td><input name="mstr_c_m" value="${editObj/mstr_c_m}" size="8"/></td>
+	</tr>
+	<tr>
+		<th>Trafienie magiczne</th>
+		<td><input name="matk_p_p" value="${editObj/matk_p_p}" size="8"/></td>
+		<td><input name="matk_p_m" value="${editObj/matk_p_m}" size="8"/></td>
+		<td><input name="matk_c_p" value="${editObj/matk_c_p}" size="8"/></td>
+		<td><input name="matk_c_m" value="${editObj/matk_c_m}" size="8"/></td>
+	</tr>
+	<tr>
+		<th>Obrona magiczna</th>
+		<td><input name="mdef_p_p" value="${editObj/mdef_p_p}" size="8"/></td>
+		<td><input name="mdef_p_m" value="${editObj/mdef_p_m}" size="8"/></td>
+		<td><input name="mdef_c_p" value="${editObj/mdef_c_p}" size="8"/></td>
+		<td><input name="mdef_c_m" value="${editObj/mdef_c_m}" size="8"/></td>
+	</tr>
+	<tr>
+		<th>Odporność magiczna</th>
+		<td><input name="mres_p_p" value="${editObj/mres_p_p}" size="8"/></td>
+		<td><input name="mres_p_m" value="${editObj/mres_p_m}" size="8"/></td>
+		<td><input name="mres_c_p" value="${editObj/mres_c_p}" size="8"/></td>
+		<td><input name="mres_c_m" value="${editObj/mres_c_m}" size="8"/></td>
+	</tr>
+	<tr>
+		<th>Pancerz</th>
+		<td colspan="2"><i>nie dotyczy</i></td>
+		<td><input name="armor_p" value="${editObj/armor_p}" size="8"/></td>
+		<td><input name="armor_m" value="${editObj/armor_m}" size="8"/></td>
+	</tr>
+	<tr>
+		<th>Szybkość</th>
+		<td><input name="speed_p" value="${editObj/speed_p}" size="8"/></td>
+		<td><input name="speed_m" value="${editObj/speed_m}" size="8"/></td>
+		<td colspan="2"><i>nie dotyczy</i></td>
+	</tr>
+	<tr>
+		<th>Regeneracja</th>
+		<td><input name="regen_p" value="${editObj/regen_p}" size="8"/></td>
+		<td><input name="regen_m" value="${editObj/regen_m}" size="8"/></td>
+		<td colspan="2"><i>nie dotyczy</i></td>
+	</tr>
+</tbody>
+
+</table>
+</fieldset>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>
