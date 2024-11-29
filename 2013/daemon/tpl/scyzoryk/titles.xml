@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form action="" method="post">
+<fieldset>
+<legend>Nowy tytuł</legend>
+<label>ID: <input name="newId"/></label>
+<button>dodaj</button>
+</fieldset>
+</form>
+
+<form action="" method="post" tal:condition="titles">
+<table class="border">
+<thead>
+<tr>
+	<th>ID</th>
+	<th>Forma żeńska</th>
+	<th>Forma męska</th>
+	<th>Forma nijaka</th>
+	<th>Typ</th>
+	<th colspan="2">
+		<button>usuń zaznaczone</button>
+	</th>
+</tr>
+</thead>
+<tbody>
+<tr tal:repeat="item titles">
+	<td>${item/title_id}</td>
+	<td>${item/name_f}</td>
+	<td>${item/name_m}</td>
+	<td>${item/name_n}</td>
+	<td>${item/type}</td>
+	<td><a href="title-edit?id=${item/title_id}">edytuj</a></td>
+	<td><label><input type="checkbox" name="del[]" value="${item/title_id}"/> usuń</label></td>
+</tr>
+</tbody>
+</table>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

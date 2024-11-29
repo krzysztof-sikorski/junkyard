@@ -1,0 +1,4 @@
+player.additem 00106e1b 100 ; Abecean Longfin (for Fortify Restoration)
+player.additem 00106e19 100 ; Cyrodilic Spadetail (for Fortify Restoration)
+player.additem 000727de 100 ; Blue Butterfly Wing (for Fortify Enchanting)
+player.additem 0001b3bd 100 ; Snowberries (for Fortify Enchanting)

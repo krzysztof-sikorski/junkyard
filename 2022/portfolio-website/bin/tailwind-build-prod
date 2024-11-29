@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+npx tailwindcss --input=src/input.css --output=public/css/combined.css --minify

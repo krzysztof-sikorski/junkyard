@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+
+<tal:block metal:use-macro="macros.xml/menuBar" define="options menu"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<p tal:condition="not:clan">Wybrany klan nie istnieje.</p>
+<tal:block>
+
+<section tal:condition="clan" class="multicols">
+
+	<table>
+	<tr><th>ID</th><td>${clan/clan_id}</td></tr>
+	<tr><th>Nazwa</th><td>${clan/name}</td></tr>
+	<tr><th>Przywódca</th><td><a href="stats-characters?view=${clan/leader_id}">${clan/leader_name}</a></td></tr>
+	<tr><th>Data założenia</th><td>${clan/date_created}</td></tr>
+	<tr><th>Liczebność</th><td>${clan/members}</td></tr>
+	<tr>
+		<th>Postacie</th>
+		<td><a href="stats-characters?clan=${clan/clan_id}">pokaż listę</a></td>
+	</tr>
+	</table>
+
+	<section tal:condition="clan/description" tal:content="structure clan/description"/>
+
+</section>
+
+
+</tal:block>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

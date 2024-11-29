@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<section class="multicols">
+	<table>
+	<caption>Postać</caption>
+	<tr>
+		<th>Poziom</th>
+		<td>${characterData/level}</td>
+	</tr>
+	<tr>
+		<th>Doświadczenie</th>
+		<td>${characterData/xp_free} + ${characterData/xp_used}</td>
+	</tr>
+	<tr>
+		<th>Zdrowie</th>
+		<td>${characterData/health} / ${characterData/health_max}</td>
+	</tr>
+	<tr>
+		<th>Mana</th>
+		<td>${characterData/mana} / ${characterData/mana_max}</td>
+	</tr>
+	<tr>
+		<th>Złoto</th>
+		<td>${characterData/gold_purse} + ${characterData/gold_bank}</td>
+	</tr>
+	</table>
+	<table>
+	<caption>Cechy bojowe</caption>
+		<tal:block metal:use-macro="macros.xml/combatStats"/>
+	</table>
+</section>
+
+<section class="multicols">
+	<form action="" method="post">
+		<table>
+		<caption>Cechy</caption>
+		<tr tal:repeat="item attributes">
+			<th>${item/name}</th>
+			<td><b>${item/value}</b></td>
+			<td><button tal:condition="item/inc" name="incA" value="${repeat/item/key}">zwiększ</button></td>
+		</tr>
+		</table>
+	</form>
+	<form action="" method="post">
+		<table>
+		<caption>Umiejętności</caption>
+		<tr tal:repeat="item skills">
+			<th>${item/name}</th>
+			<tal:block condition="item/value">
+				<td><b>${item/value}</b></td>
+				<td><button tal:condition="item/inc" name="incS" value="${repeat/item/key}">zwiększ</button></td>
+			</tal:block>
+			<td colspan="2" tal:condition="not:item/value"><i>nieznana</i></td>
+		</tr>
+		</table>
+	</form>
+	<form action="" method="post">
+		<table>
+		<caption>Zaklęcia</caption>
+		<tr tal:repeat="item spells">
+			<th>${item/name}</th>
+			<tal:block condition="item/_cost">
+				<td><b>${item/_cost}</b> MP</td>
+				<td><button tal:condition="item/_cast" name="cast" value="${item/spell_id}">rzuć</button></td>
+			</tal:block>
+			<td colspan="2" tal:condition="not:item/_cost"><i>nieznane</i></td>
+		</tr>
+		</table>
+	</form>
+</section>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

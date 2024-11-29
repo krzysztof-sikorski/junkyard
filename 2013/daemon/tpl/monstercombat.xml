@@ -1,0 +1,43 @@
+<h2>${activeCharacter/name} vs ${monsterName}</h2>
+
+<section class="multicols">
+
+	<section tal:condition="characterData/health">
+		<p>
+			Zdrowie: <b>${characterData/health} / ${characterData/health_max}</b>
+			<br/>
+			Mana: <b>${characterData/mana} / ${characterData/mana_max}</b>
+		</p>
+		<form tal:condition="not:fromEvent" action="" method="post">
+			<p>
+				<button name="act" value="train">trening</button><br/>
+				<button name="act" value="rest">odpoczynek</button><br/>
+				<button name="act" value="hunt">polowanie</button>
+			</p>
+		</form>
+	</section>
+
+	<section tal:condition="php:'a'==winner">
+		<p>Walkę wygrywa <i>${activeCharacter/name}</i>.</p>
+		<p>
+			Doświadczenie: <b>${characterData/xp_free} (+${winnerXp})</b>,
+			złoto <b>${characterData/gold_purse} (+${winnerGold})</b>.
+		</p>
+		<p tal:condition="winnerLevel">Nowy poziom: <b>${winnerLevel}</b>.</p>
+		<p tal:condition="winnerDrop">Zdobyty przedmiot: <i>${winnerDrop}</i>.</p>
+		<p tal:condition="winnerMission">Misja zakończona - zgłoś się do świątyni po nagrodę.</p>
+	</section>
+
+	<section tal:condition="php:'m'==winner">
+		<p>Walkę wygrywa <i>${monsterName}</i>.</p>
+		<p class="ex">${activeCharacter/name} traci powłokę cielesną.</p>
+	</section>
+
+	<section tal:condition="not:winner">
+		<p class="ex">Potwór ucieka.</p>
+	</section>
+
+</section>
+
+<h2>Przebieg walki</h2>
+<section tal:content="structure combatLog"></section>

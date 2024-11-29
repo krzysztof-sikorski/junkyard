@@ -1,0 +1,46 @@
+player.additem 0010df45 1 ; Fortify Alchemy: Necklace of Minor Alchemy
+player.additem 000ff7de 1 ; Fortify Alteration: Ring of Minor Alteration
+player.additem 00100e23 1 ; Fortify Archery: Ring of Minor Archery
+player.additem 0010df4b 1 ; Fortify Barter: Necklace of Minor Haggling
+player.additem 00100df3 1 ; Fortify Block: Ring of Minor Blocking
+player.additem 0007a135 1 ; Fortify Carry Weight: Hide Boots of Lifting
+player.additem 00100df9 1 ; Fortify Conjuration: Ring of Minor Conjuration
+player.additem 00100dff 1 ; Fortify Destruction: Ring of Minor Destruction
+player.additem 00100e51 1 ; Fortify Healing Rate: Ring of Remedy
+player.additem 000fcefd 1 ; Fortify Health: Ring of Minor Health
+player.additem 00100e0b 1 ; Fortify Heavy Armor: Ring of the Minor Knight
+player.additem 00100e11 1 ; Fortify Illusion: Ring of Minor Illusion
+player.additem 00100e18 1 ; Fortify Light Armor: Ring of the Minor Squire
+player.additem 00100e17 1 ; Fortify Lockpicking: Ring of Minor Lockpicking
+player.additem 000ff7d2 1 ; Fortify Magicka: Ring of Minor Magicka
+player.additem 00100e59 1 ; Fortify Magicka Rate: Ring of Recharging
+player.additem 00100e29 1 ; Fortify One-Handed: Ring of Minor Wielding
+player.additem 00100e2f 1 ; Fortify Pickpocket: Ring of Minor Deft Hands
+player.additem 00100e34 1 ; Fortify Restoration: Ring of Minor Restoration
+player.additem 00100e3b 1 ; Fortify Smithing: Ring of Minor Smithing
+player.additem 00100e3a 1 ; Fortify Sneak: Ring of Minor Sneaking
+player.additem 000fcef7 1 ; Fortify Stamina: Ring of Minor Stamina
+player.additem 00100e55 1 ; Fortify Stamina Regen: Ring of Recuperation
+player.additem 00100e4c 1 ; Fortify Two-Handed: Ring of Minor Striking
+player.additem 00092a75 1 ; Muffle: Steel Boots of Muffling
+player.additem 00100e64 1 ; Resist Disease: Necklace of Disease Resistance
+player.additem 000fc043 1 ; Resist Fire: Necklace of Resist Fire
+player.additem 000fc049 1 ; Resist Frost: Necklace of Frost Resist
+player.additem 0010dfc8 1 ; Resist Magic: Ring of Resist Magic
+player.additem 000fc03d 1 ; Resist Poison: Necklace of Poison Resistance
+player.additem 000fc04f 1 ; Resist Shock: Necklace of Resist Shock
+player.additem 000fc067 1 ; Waterbreathing: Necklace of Waterbreathing
+
+player.additem 000aa16f 1 ; Absorb Health: Orcish Dagger of Absorption
+player.additem 000aa172 1 ; Absorb Magicka: Orcish Dagger of Siphoning
+player.additem 000aa175 1 ; Absorb Stamina: Orcish Dagger of Gleaning
+player.additem 000be189 1 ; Banish: Elven Dagger of Banishing
+player.additem 0008970b 1 ; Fear: Iron Dagger of Dismay
+player.additem 000896ae 1 ; Fire Damage: Iron Dagger of Embers
+player.additem 000896bd 1 ; Frost Damage: Iron Dagger of Chills
+player.additem 000896d5 1 ; Magicka Damage: Iron Dagger of Sapping
+player.additem 000be197 1 ; Paralyze: Elven Dagger of Stunning
+player.additem 000896c9 1 ; Shock Damage: Iron Dagger of Sparks
+player.additem 000896ea 1 ; Soul Trap: Iron Dagger of Souls
+player.additem 000896ff 1 ; Stamina Damage: Iron Dagger of Fatigue
+player.additem 000896f3 1 ; Turn Undead: Blessed Iron Dagger

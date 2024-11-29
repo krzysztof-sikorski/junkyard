@@ -1,0 +1,9 @@
+<tal:block condition="not:hasTitle">
+	<p>
+	Otacza cię mrok a w powietrzu unosi się jakaś dziwna woń. Otwierasz powoli oczy. Przed sobą widzisz jakąś istotę... Maleńkiego, przerażonego człowieczka, trzymającego jakieś zakrzywione ostrze w dłoni... Sztylet... SZTYLET OFIARNY!!! Rozglądasz się dookoła i ze zdumieniem stwierdzasz iż siedzisz właśnie na ołtarzu spływającym krwią. W ciszy niczym szum wodospadu słychać spływającą krew, a łomot przerażonego serca kultysty przygrywa niczym perkusja. Wstajesz i powoli zbliżasz się do tej maleńkiej istotki. Po raz pierwszy i ostatni zamierzasz okazać miłosierdzie. W końcu Ten człowieczek pomógł Ci tu przyjść. <q>Tak... Okażę miłosierdzie...</q> - myślisz, po czym rozszarpujesz kultystę gołymi rękoma...
+	</p>
+	<section tal:content="structure combatLog"></section>
+</tal:block>
+<p tal:condition="hasTitle">
+Stoisz pośrodku komnaty patrząc na resztki nieszczęsnego kultysty. Uśmiech pojawia się na chwile na Twej twarzy na wspomnienie jego agonii, po czym odwracasz się w stronę wyjścia. Z tamtego kierunku coś Cię nawołuje. Tak... Przypominasz sobie... To zew walki... To zew krwi...
+</p>

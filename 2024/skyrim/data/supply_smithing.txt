@@ -1,0 +1,2 @@
+player.additem 0005ad9e 100 ; Gold Ingot
+player.additem 0006851f 100 ; Flawless Diamond

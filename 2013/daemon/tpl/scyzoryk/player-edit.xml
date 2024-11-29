@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form tal:condition="player" action="" method="post">
+<fieldset>
+<legend>Dane gracza</legend>
+<table>
+
+<tr>
+<th>Login</th>
+<td><b>${player/login}</b></td>
+</tr>
+
+<tr>
+<th>Rejestracja</th>
+<td><input name="date_created" size="32" value="${player/date_created}"/></td>
+</tr>
+
+<tr>
+<th>Ostatni login</th>
+<td><input name="last_login" size="32" value="${player/last_login}"/></td>
+</tr>
+
+<tr>
+<th>Zmiana hasła</th>
+<td>
+	<input name="pass1" type="password" autocomplete="off" size="32"/>
+	<input name="pass2" type="password" autocomplete="off" size="32"/>
+</td>
+</tr>
+
+<tr>
+<th>Uprawnienia</th>
+<td>
+	<label><input type="checkbox" name="roles[chat]" tal:attributes="checked playerRoles/chat"/> pisanie w ogłoszeniach</label>
+	<label><input type="checkbox" name="roles[login]" tal:attributes="checked playerRoles/login"/> logowanie do gry (nieużywane)</label>
+</td>
+</tr>
+
+<tr>
+<th>Nazwa</th>
+<td><input name="name" size="48" value="${player/name}"/></td>
+</tr>
+
+<tr>
+<th>Styl strony</th>
+<td>
+	<label tal:repeat="skin skins">
+		<input type="radio" name="skin" value="${skin}" tal:attributes="checked php:skin==player.skin"/>${skin}
+	</label>
+</td>
+</tr>
+
+<tr>
+<th>Email</th>
+<td><input name="email" size="64" value="${player/email}"/></td>
+</tr>
+
+<tr>
+<th></th>
+<td>
+	<button type="reset">cofnij</button>
+	<button name="save">zapisz</button>
+	<a href="players">wróć do listy</a>
+</td>
+<td></td>
+</tr>
+
+</table>
+</fieldset>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

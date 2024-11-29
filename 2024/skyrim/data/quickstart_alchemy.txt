@@ -1,0 +1,3 @@
+player.additem 000fc005 1 ; Circlet of Peerless Alchemy
+player.additem 0010df4a 1 ; Necklace of Peerless Alchemy
+player.additem 000d79d2 1 ; Dragonscale Gauntlets of Peerless Alchemy

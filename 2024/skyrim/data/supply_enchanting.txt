@@ -1,0 +1,1 @@
+player.additem 0002e4ff 100 ; filled Grand Soul Gem
