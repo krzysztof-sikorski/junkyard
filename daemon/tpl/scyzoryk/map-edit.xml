@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form tal:condition="map" action="" method="post">
+<fieldset>
+<legend>Dane mapu</legend>
+<table>
+
+<tr>
+<th>ID</th>
+<td>
+	<input name="id" size="32" value="${map/map_id}"/>
+	<i>Zmień by utworzyć kopię.</i>
+</td>
+</tr>
+
+<tr>
+<th>Nazwa</th>
+<td>
+	<input name="name" size="48" value="${map/name}"/>
+</td>
+</tr>
+
+<tr>
+<th>URL</th>
+<td>
+	<input name="url" size="48" value="${map/url}"/>
+	<i>URL do pliku mapy, jeśli względny to względem katalogu <a href="../static/">static/</a> gry.</i>
+</td>
+</tr>
+
+<tr>
+<th>Kolejność</th>
+<td>
+	<input name="sort" size="6" value="${map/sort}"/>
+</td>
+</tr>
+
+<tr>
+<th></th>
+<td>
+	<button type="reset">cofnij</button>
+	<button>zapisz</button>
+	<a href="maps">wróć do listy</a>
+</td>
+<td></td>
+</tr>
+
+</table>
+</fieldset>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

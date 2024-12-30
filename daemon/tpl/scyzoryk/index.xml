@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<h1>Ciekawostki</h1>
+<p>Wygrzebane z archiwalnego kodu...</p>
+
+<section class="multicols">
+
+	<section>
+		<p>Ile kasy za przedmiot (od poziomu potwora)</p>
+		<table>
+		<tr><th>poziom</th><th>cena</th></tr>
+		<tr tal:repeat="row prices">
+		<th>${repeat/row/key}</th><td>${row} zł</td>
+		</tr>
+		</table>
+	</section>
+
+	<section>
+		<p>Ile bonusu powinien mieć przedmiot za potwora</p>
+		<table>
+		<tr><th>bonus %</th><th>bonus stały</th><th>cena</th></tr>
+		<tr tal:repeat="row bonuses">
+		<td>${row/bonusp}</td><td>${row/bonusc}</td><td>${row/price} zł</td>
+		</tr>
+		</table>
+	</section>
+
+</section>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

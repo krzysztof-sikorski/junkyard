@@ -1,0 +1,12 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<section tal:content="structure eventLog"></section>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

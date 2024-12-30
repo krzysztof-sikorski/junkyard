@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form tal:condition="service" action="" method="post">
+<fieldset>
+<legend>Dane usługi</legend>
+<table>
+
+<tr>
+<th>ID</th>
+<td>
+	<input name="id" size="32" value="${service/service_id}"/>
+	<i>Zmień by utworzyć kopię.</i>
+</td>
+</tr>
+
+<tr>
+<th>Nazwa</th>
+<td>
+	<input name="name" size="48" value="${service/name}"/>
+</td>
+</tr>
+
+<tr>
+<th>Typ</th>
+<td>
+	<label tal:repeat="item serviceTypes"><input type="radio" name="type" tal:attributes="value repeat/item/key; checked php:service.type == repeat.item.key"/> ${item}</label>
+</td>
+</tr>
+
+<tr>
+<th>Frakcja</th>
+<td>
+	<select name="faction_id">
+	<option value="" tal:attributes="selected not:service/faction_id">&lt;brak&gt;</option>
+	<option tal:repeat="item factions" tal:attributes=" value item/faction_id; selected php:service.faction_id == item['faction_id']">${item/name}</option>
+	</select>
+	<label>Ranga: <input name="rank_id" value="${service/rank_id}" size="4"/></label>
+</td>
+</tr>
+
+<tr>
+<th>Opis</th>
+<td>
+	<textarea name="desc" cols="80" rows="5">${service/description}</textarea>
+</td>
+</tr>
+
+<tr>
+<th></th>
+<td>
+	<button type="reset">cofnij</button>
+	<button>zapisz</button>
+	<a href="services">wróć do listy</a>
+</td>
+</tr>
+
+</table>
+</fieldset>
+</form>
+
+<h2>Oferta sklepu</h2>
+
+<form action="" method="post">
+<fieldset>
+<legend>Nowy przedmiot</legend>
+
+<label>ID: <input name="id" id="searchItem" value=""/></label>
+<img src="../static/search.png" alt="szukaj" data-search-type="i" data-search-target="searchItem"/>
+<button name="addItem" value="1">dodaj</button>
+</fieldset>
+</form>
+
+<form action="" method="post" tal:condition="serviceItems">
+<table class="border">
+<thead>
+<tr>
+	<th>ID</th>
+	<th>Nazwa</th>
+	<th>Typ</th>
+	<th>Ilość</th>
+	<th>
+		<button>usuń zaznaczone</button>
+	</th>
+</tr>
+</thead>
+<tbody>
+<tr tal:repeat="item serviceItems">
+	<td>${item/item_id}</td>
+	<td>${item/name}</td>
+	<td>${item/type}</td>
+	<td tal:condition="not:item/_drop">&#8734;</td>
+	<td tal:condition="item/_drop">${item/quantity}</td>
+	<td>
+		<label><input type="checkbox" name="del[]" value="${item/item_id}"/> usuń</label>
+	</td>
+</tr>
+</tbody>
+</table>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

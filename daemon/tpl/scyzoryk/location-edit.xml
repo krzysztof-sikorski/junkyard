@@ -1,0 +1,259 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form tal:condition="editObj" action="" method="post">
+<fieldset>
+<legend>Dane lokacji</legend>
+<table>
+
+<tr>
+<th>Zapisz jako ID</th>
+<td>
+	<input name="location_id" size="32" value="${editObj/location_id}"/>
+	<i>Zmień by utworzyć kopię.</i>
+</td>
+</tr>
+
+<tr>
+<th>Nazwa</th>
+<td>
+	<input name="name" size="48" value="${editObj/name}"/>
+</td>
+</tr>
+
+<tr>
+<th>Region</th>
+<td>
+	<select name="region_id">
+	<option value="" tal:attributes="selected not:editObj/region_id">&lt;brak&gt;</option>
+	<option tal:repeat="item regions" tal:attributes=" value item/region_id; selected php:editObj.region_id == item['region_id']">${item/name}</option>
+	</select>
+</td>
+</tr>
+
+<tr>
+<th>Typ</th>
+<td>
+	<label tal:repeat="item locationTypes"><input type="radio" name="type" tal:attributes="value repeat/item/key; checked php:editObj.type == repeat.item.key"/> ${item}</label>
+</td>
+</tr>
+
+<tr>
+<th>Szansa zdarzenia</th>
+<td>
+	<input name="chance1" size="4" value="${editObj/chance1}"/>
+	/ <input name="chance2" size="4" value="${editObj/chance2}"/>
+	<i>Łączna szansa na zdarzenie (skrypt lub atak potwora) przy odwiedzaniu lokacji.</i>
+</td>
+</tr>
+
+<tr>
+<th>Boss</th>
+<td>
+	<input name="boss_id" id="searchBoss" value="${editObj/boss_id}"/>
+	<img src="../static/search.png" alt="szukaj" data-search-type="m" data-search-target="searchBoss"/>
+	<label tal:repeat="item bossStatuses"><input type="radio" name="boss_status" tal:attributes="value repeat/item/key; checked php:editObj.boss_status == repeat.item.key"/> ${item}</label>
+</td>
+</tr>
+
+<tr>
+<th>Opis</th>
+<td>
+	<textarea name="description" cols="100" rows="5">${editObj/description}</textarea>
+</td>
+</tr>
+
+<tr>
+<th>Obrazek (URL)</th>
+<td>
+	<input name="picture_url" size="48" value="${editObj/picture_url}"/>
+</td>
+</tr>
+
+<tr>
+<th>Frakcja</th>
+<td>
+	<select name="faction_id">
+	<option value="" tal:attributes="selected not:editObj/faction_id">&lt;brak&gt;</option>
+	<option tal:repeat="item factions" tal:attributes=" value item/faction_id; selected php:editObj.faction_id == item['faction_id']">${item/name}</option>
+	</select>
+	<label>Wartość: <input name="faction_value" value="${editObj/faction_value}" size="4"/></label>
+</td>
+</tr>
+
+<tr>
+<th></th>
+<td>
+	<button type="reset">cofnij</button>
+	<button>zapisz</button>
+	<a href="locations">wróć do listy</a>
+</td>
+<td></td>
+</tr>
+
+</table>
+</fieldset>
+</form>
+
+<h2>Wędrówka</h2>
+
+<form action="" method="post">
+<fieldset>
+<legend>Nowa ścieżka</legend>
+<label>ID celu: <input name="id" id="searchPath" value=""/></label>
+<img src="../static/search.png" alt="szukaj" data-search-type="l" data-search-target="searchPath"/>
+<label><input type="checkbox" name="bidir"/> dodaj także odwrotną</label>
+<button name="addPath" value="1">dodaj</button>
+<i>Może nadpisać istniejące ścieżki.</i>
+</fieldset>
+</form>
+
+<form action="" method="post" tal:condition="paths">
+<table class="border">
+<thead>
+<tr>
+	<th>ID celu</th>
+	<th>Nazwa celu</th>
+	<th>Nazwa ścieżki</th>
+	<th>Koszt</th>
+	<th colspan="2">
+		<button>usuń zaznaczone</button>
+	</th>
+</tr>
+</thead>
+<tbody>
+<tr tal:repeat="item paths">
+	<td>${item/destination_id}</td>
+	<tal:block condition="item/destination_name">
+		<td><a href="location-edit?id=${item/destination_id}">${item/destination_name}</a></td>
+		<td><tal:block content="item/name | default"><i>użyj nazwy celu</i></tal:block></td>
+	</tal:block>
+	<td tal:condition="not:item/destination_name" colspan="2"><i>nie znaleziono</i></td>
+	<td>${item/cost_gold} zł / ${item/cost_mana} MP</td>
+	<td><a href="location-path-edit?id=${editObj/location_id}&amp;id2=${item/destination_id}">edytuj</a></td>
+	<td>
+		<label><input type="checkbox" name="delPaths[]" value="${item/destination_id}"/> usuń</label>
+		<label><input type="checkbox" name="delPathsRev[]" value="1"/> usuń także odwrotną</label>
+	</td>
+</tr>
+</tbody>
+</table>
+</form>
+
+<h2>Potwory</h2>
+
+<form action="" method="post">
+<fieldset>
+<legend>Nowy potwór</legend>
+<label>ID: <input name="id" id="searchMonster" value=""/></label>
+<img src="../static/search.png" alt="szukaj" data-search-type="m" data-search-target="searchMonster"/>
+<button name="addMonster" value="1">dodaj</button>
+</fieldset>
+</form>
+
+<form action="" method="post" tal:condition="monsters">
+<table class="border">
+<thead>
+<tr>
+	<th>ID</th>
+	<th>Nazwa</th>
+	<th>Szansa</th>
+	<th colspan="2">
+		<button>usuń zaznaczone</button>
+	</th>
+</tr>
+</thead>
+<tbody>
+<tr tal:repeat="item monsters">
+	<td>${item/monster_id}</td>
+	<td tal:condition="item/monster_name"><a href="monster-edit?id=${item/monster_id}">${item/monster_name}</a></td>
+	<td tal:condition="not:item/monster_name"><i>nie znaleziono</i></td>
+	<td>${item/chance}</td>
+	<td><a href="location-monster-edit?id=${item/location_id}&amp;id2=${item/monster_id}">edytuj</a></td>
+	<td><label><input type="checkbox" name="delMonster[]" value="${item/monster_id}"/> usuń</label></td>
+</tr>
+</tbody>
+</table>
+</form>
+
+<h2>Zdarzenia</h2>
+
+<form action="" method="post">
+<fieldset>
+<legend>Nowe zdarzenie specjalne</legend>
+<label>Zdarzenie: <select name="id">
+	<option value="" selected=""></option>
+	<option tal:repeat="item eventNames" value="${item/event_id}">${item/name}</option>
+</select></label>
+<button name="addEvent" value="1">dodaj</button>
+</fieldset>
+</form>
+
+<form action="" method="post" tal:condition="events">
+<table class="border">
+<thead>
+<tr>
+	<th>Skrypt</th>
+	<th>Szansa</th>
+	<th>Parametry</th>
+	<th colspan="2">
+		<button>usuń zaznaczone</button>
+	</th>
+</tr>
+</thead>
+<tbody>
+<tr tal:repeat="item events">
+	<td><a href="event-edit?id=${item/event_id}">${item/event_id}</a></td>
+	<td>${item/chance}</td>
+	<td tal:content="item/params | default"><i>brak</i></td>
+	<td><a href="location-event-edit?id=${item/location_id}&amp;id2=${item/event_id}">edytuj</a></td>
+	<td><label><input type="checkbox" name="delEvent[]" value="${item/event_id}"/> usuń</label></td>
+</tr>
+</tbody>
+</table>
+</form>
+
+<h2>Usługi</h2>
+
+<form action="" method="post">
+<fieldset>
+<legend>Nowa usługa</legend>
+<label>Usługa: <select name="id">
+	<option value="" selected=""></option>
+	<option tal:repeat="item serviceNames" value="${item/service_id}">&lt;${item/type}&gt; ${item/name}</option>
+</select></label>
+<button name="addService" value="1">dodaj</button>
+</fieldset>
+</form>
+
+<form action="" method="post" tal:condition="services">
+<table class="border">
+<thead>
+<tr>
+	<th>ID</th>
+	<th>Nazwa</th>
+	<th>Typ</th>
+	<th>
+		<button>usuń zaznaczone</button>
+	</th>
+</tr>
+</thead>
+<tbody>
+<tr tal:repeat="item services">
+	<td>${item/service_id}</td>
+	<tal:block condition="item/service_name">
+		<td>${item/service_name}</td>
+		<td>${item/service_type}</td>
+	</tal:block>
+	<td tal:condition="not:item/service_name" colspan="2"><i>nie znaleziono</i></td>
+	<td><label><input type="checkbox" name="delService[]" value="${item/service_id}"/> usuń</label></td>
+</tr>
+</tbody>
+</table>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

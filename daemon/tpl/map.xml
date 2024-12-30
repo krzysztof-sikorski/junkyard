@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<p tal:condition="locationDesc"><i tal:content="structure locationDesc"></i></p>
+
+<section class="multicols">
+	<table>
+	<tr>
+		<th>Poziom</th>
+		<td>${characterData/level}</td>
+	</tr>
+	<tr>
+		<th>Doświadczenie</th>
+		<td>${characterData/xp_free} + ${characterData/xp_used}</td>
+	</tr>
+	<tr>
+		<th>Zdrowie</th>
+		<td>${characterData/health} / ${characterData/health_max}</td>
+	</tr>
+	<tr>
+		<th>Mana</th>
+		<td>${characterData/mana} / ${characterData/mana_max}</td>
+	</tr>
+	<tr>
+		<th>Złoto</th>
+		<td>${characterData/gold_purse} + ${characterData/gold_bank}</td>
+	</tr>
+	<tr tal:condition="lastMission">
+		<th>Misja</th>
+		<td>
+			${lastMission/_name}<br/>
+			świątynia: ${lastMission/service_name}<br/>
+			przeliczenie nr ${lastMission/rollover_id}<br/>
+			status: <b>${lastMission/_statusName}</b>
+		</td>
+	</tr>
+	</table>
+	<div class="box" style="background-image:url(${pictureUrl})">
+		<p>
+			<tal:block condition="region">Region: ${region}<br/></tal:block>
+			Lokacja: <b>${location/name}</b><br/>
+			<tal:block condition="php:location.type == 'arena'">Arena - PvP ograniczone<br/></tal:block>
+			<tal:block condition="php:location.type == 'caern'">Caern - PvP ograniczone<br/></tal:block>
+			<tal:block condition="php:location.type == 'boss'">Boss (${location/boss_status_name}) - PvP ograniczone<br/></tal:block>
+			<tal:block condition="faction">Frakcja: ${faction}<br/></tal:block>
+		</p>
+		<ul>
+			<li tal:repeat="item maps"><a href="static/${item/url}" target="maps">${item/name}</a></li>
+		</ul>
+	</div>
+	<p tal:condition="activeCharacter/avatar_url" class="avatar">
+		<img src="${activeCharacter/avatar_url}" alt="${activeCharacter/avatar_url}"/>
+	</p>
+</section>
+
+<section class="multicols">
+	<form action="" method="post">
+		<h2>Akcja</h2>
+		<p>
+			<button name="act" value="train">trening</button><br/>
+			<button name="act" value="rest">odpoczynek</button><br/>
+			<button name="act" value="hunt">polowanie</button>
+		</p>
+	</form>
+	<form action="" method="post">
+		<h2>Wędrówka</h2>
+		<p>
+			<tal:block repeat="item paths">
+				<button name="travel" value="${item/destination_id}" tal:attributes="disabled not:item/_enabled">
+					${item/path_name}
+					<tal:block condition="php:item['cost_gold'] || item['cost_mana']">(${item/cost_gold} zł, ${item/cost_mana} MP)</tal:block>
+				</button>
+				<br tal:condition="not:repeat/item/end"/>
+			</tal:block>
+		</p>
+	</form>
+	<div>
+		<h2>Usługi</h2>
+		<ul>
+			<tal:block repeat="item services">
+				<li tal:condition="item/_enabled"><a href="service.php?id=${item/service_id}">${item/name}</a></li>
+				<li tal:condition="not:item/_enabled">${item/name}</li>
+			</tal:block>
+		</ul>
+	</div>
+</section>
+
+<section tal:condition="characters">
+<form action="duel" method="post">
+	<h2>Inne postacie w tej lokacji</h2>
+	<table class="border">
+	<tr><th>Postać</th><th>Poziom</th><th>EXP</th><th>Frakcja</th><th>PvP</th></tr>
+	<tr tal:repeat="item characters">
+		<td><a href="stats-characters?view=${item/character_id}">${item/name}</a></td>
+		<td>${item/level}</td>
+		<td>${item/xp_used}</td>
+		<td tal:condition="not:item/faction_id"><i>brak</i></td>
+		<td tal:condition="item/faction_id">${item/faction_name} (ranga ${item/rank_id})</td>
+		<td tal:condition="not:item/_canAttack"><i>niedozwolone</i></td>
+		<td tal:condition="item/_canAttack">
+			<button tal:condition="not:item/_sparring" name="attack" value="${item/character_id}">atakuj</button>
+			<button tal:condition="item/_sparring" name="attack" value="${item/character_id}">sparring</button>
+		</td>
+	</tr>
+	</table>
+	<p><a tal:condition="showMoreLink" href="?more">pokaż wszystkie postacie</a></p>
+</form>
+</section>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

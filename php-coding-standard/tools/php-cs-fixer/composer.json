@@ -1,0 +1,16 @@
+{
+  "description": "Dummy project to load php-cs-fixer package.",
+  "type": "project",
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.27"
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "config": {
+    "preferred-install": "dist",
+    "optimize-autoloader": true,
+    "sort-packages": true,
+    "notify-on-install": false,
+    "platform-check": true
+  }
+}

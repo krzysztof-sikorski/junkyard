@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form action="" method="post">
+<fieldset>
+<legend>Nowy region</legend>
+<label>ID: <input name="newId"/></label>
+<label>Nazwa: <input name="newName"/></label>
+<button>dodaj</button>
+</fieldset>
+</form>
+
+<form action="" method="post" tal:condition="regions">
+<table class="border">
+<thead>
+<tr>
+	<th>ID</th>
+	<th>Nazwa</th>
+	<th>Respawn</th>
+	<th colspan="2">
+		<button>usuń zaznaczone</button>
+	</th>
+</tr>
+</thead>
+<tbody>
+<tr tal:repeat="item regions">
+	<td>${item/region_id}</td>
+	<td>${item/name}</td>
+	<td tal:condition="item/respawn_name"><a href="location-edit?id=${item/respawn_id}">${item/respawn_name}</a></td>
+	<td tal:condition="not:item/respawn_name"><i>nie znaleziono</i></td>
+	<td><a href="region-edit?id=${item/region_id}">edytuj</a></td>
+	<td><label><input type="checkbox" name="del[]" value="${item/region_id}"/> usuń</label></td>
+</tr>
+</tbody>
+</table>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

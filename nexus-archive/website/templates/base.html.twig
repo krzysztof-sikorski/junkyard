@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Nexus Archive{% endblock %}</title>
+    <link href="/css/combined.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav>
+        <menu>
+            {% for menuItem in mainMenuGenerator.getMenu() %}
+                {% if menuItem.external %}
+                    <li><a href="{{ menuItem.url }}" rel="external">{{ menuItem.name }}</a></li>
+                {% else %}
+                    <li><a href="{{ menuItem.url }}">{{ menuItem.name }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </menu>
+    </nav>
+</header>
+<main>
+    {% block body %}{% endblock %}
+</main>
+</body>
+</html>
