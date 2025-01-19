@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Leaderboards - Nexus Archive{% endblock %}
+
+{% block body %}
+    <h1>Leaderboards</h1>
+
+    <section>
+        <form action="" method="get">
+            <label>
+                Game period:
+                <select name="gamePeriod">
+                    {% for id, item in optionsGamePeriods %}
+                        <option value="{{ id }}"
+                                {% if id == selectedGamePeriodId %}selected{% endif %}>{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <button type="submit">Switch</button>
+        </form>
+    </section>
+
+    <section class="leaderboard-grid">
+        {% for leaderboard in leaderboards %}
+            <article>
+                <table>
+                    <caption>{{ leaderboard.category.name }} ({{ leaderboard.category.type|capitalize }})</caption>
+                    <thead>
+                    <tr>
+                        <th>Position</th>
+                        <th>Character</th>
+                        <th>{{ leaderboard.category.scoreLabel }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entry in leaderboard.entries %}
+                        <tr>
+                            <td>{{ entry.position }}</td>
+                            <td>{{ entry.characterName }}</td>
+                            <td>{{ entry.score }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </article>
+        {% else %}
+            <article class="error">No leaderboards found for selected period.</article>
+        {% endfor %}
+    </section>
+{% endblock %}

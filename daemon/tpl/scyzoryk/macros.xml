@@ -1,0 +1,39 @@
+<tal:block metal:define-macro="pageFooter">
+<script src="../static/common.js"></script>
+<script src="../static/scyzoryk.js"></script>
+</tal:block>
+
+
+<tal:block metal:define-macro="pageHeader">
+<header>
+<ul class="menu border">
+<li><a href="../" rel="index" target="_blank">gra</a></li>
+<li><a href="./" rel="index" target="_blank">scyzoryk</a></li>
+<li><a href="regions">regiony</a></li>
+<li><a href="locations">lokacje</a></li>
+<li><a href="monsters">potwory</a></li>
+<li><a href="events">zdarzenia</a></li>
+<li><a href="items">przedmioty</a></li>
+<li><a href="services">usługi</a></li>
+<li><a href="factions">frakcje</a></li>
+<li><a href="titles">tytuły</a></li>
+<li><a href="maps">mapy</a></li>
+<li><a href="news">news</a></li>
+<li><a href="config">ustawienia</a></li>
+<li><a href="combat-units">jednostki</a></li>
+<li><a href="arena">arena</a></li>
+<li><a href="reset">reset</a></li>
+<li><a href="generator">generator</a></li>
+<li><a href="item-templates">szablony</a></li>
+<li><a href="players">gracze</a></li>
+<li><a href="characters">postacie</a></li>
+</ul>
+</header>
+</tal:block>
+
+
+<tal:block metal:define-macro="pageMetadata">
+<meta charset="utf-8"/>
+<title tal:content="pageTitle"/>
+<link rel="stylesheet" href="../static/basic.css"/>
+</tal:block>

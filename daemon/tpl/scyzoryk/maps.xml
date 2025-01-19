@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form action="" method="post">
+<fieldset>
+<legend>Nowa mapa</legend>
+<label>ID: <input name="newId"/></label>
+<label>Nazwa: <input name="newName"/></label>
+<button>dodaj</button>
+</fieldset>
+</form>
+
+<form action="" method="post" tal:condition="maps">
+<table class="border">
+<thead>
+<tr>
+	<th>ID</th>
+	<th>Nazwa</th>
+	<th>URL</th>
+	<th>Kolejność</th>
+	<th colspan="2">
+		<button>usuń zaznaczone</button>
+	</th>
+</tr>
+</thead>
+<tbody>
+<tr tal:repeat="item maps">
+	<td>${item/map_id}</td>
+	<td>${item/name}</td>
+	<td>${item/url}</td>
+	<td>${item/sort}</td>
+	<td><a href="map-edit?id=${item/map_id}">edytuj</a></td>
+	<td><label><input type="checkbox" name="del[]" value="${item/map_id}"/> usuń</label></td>
+</tr>
+</tbody>
+</table>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>

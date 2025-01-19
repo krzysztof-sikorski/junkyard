@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <title>Options - Nexus Archive Tracker</title>
+  <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+<form id="optionsForm" method="post">
+  <fieldset>
+    <legend>Tracker options</legend>
+    <p>
+      <label>
+        User access token:
+        <input name="userAccessToken" required size="64" type="text" pattern="[0-9A-Fa-f]+">
+      </label>
+    </p>
+    <p>
+      <label>
+        Submit form's URL:
+        <input name="trackerSubmitUrl" required size="64" type="url">
+      </label>
+    </p>
+  </fieldset>
+  <p>
+    <button type="submit">Save</button>
+  </p>
+</form>
+<script src="../src/preferences.js"></script>
+<script src="../src/options.js"></script>
+</body>
+</html>

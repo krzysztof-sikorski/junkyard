@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a {
+  @apply tw-text-blue-900;
+}
+
+a[rel="external"]:after {
+  content: ' ↗';
+}
+
+button[type="submit"] {
+  @apply tw-px-4 tw-py-2 tw-font-bold tw-text-white tw-bg-black tw-rounded-lg;
+}
+
+body > * {
+  @apply tw-mx-8 tw-my-4;
+}
+
+header {
+  @apply tw-flex;
+}
+
+header a {
+  @apply tw-text-white;
+}
+
+header menu {
+  @apply tw-flex
+  tw-text-xl tw-font-bold tw-leading-loose
+  tw-text-white tw-bg-black
+  tw-border-solid tw-rounded-xl
+  tw-divide-x-4 tw-divide-dotted tw-divide-white
+  tw-shadow-lg;
+}
+
+header menu > li {
+  @apply tw-px-8 tw-py-2;
+}
+
+main h1 {
+  @apply tw-text-4xl tw-font-bold tw-leading-loose;
+}
+
+table {
+  @apply tw-my-4 tw-border-collapse;
+}
+
+table th, table td {
+  @apply tw-border-solid tw-border-2 tw-border-black tw-px-4 tw-py-2;
+}
+
+section.leaderboard-grid {
+  @apply tw-grid tw-gap-x-8 tw-gap-y-4
+  tw-grid-cols-1 md:tw-grid-cols-2 xl:tw-grid-cols-3;
+}
+
+section.leaderboard-grid caption {
+  @apply tw-text-lg tw-font-bold;
+}
+
+section.leaderboard-grid article.error {
+  @apply tw-my-4 tw-text-red-500 tw-text-lg tw-font-bold;
+}

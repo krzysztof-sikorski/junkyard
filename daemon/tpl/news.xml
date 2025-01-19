@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<id>${feedId}</id>
+<title>${feedTitle}</title>
+<updated>${feedUpdated}</updated>
+<author><name>Daemon-Info</name></author>
+<link rel="self" href="${feedUrl}"/>
+<subtitle>Making the game since 2008 (-_-;)</subtitle>
+<entry tal:repeat="item entries">
+	<id>${item/id}</id>
+	<title>${item/title}</title>
+	<updated>${item/updated}</updated>
+	<published>${item/published}</published>
+	<author><name>${item/author}</name></author>
+	<content type="xhtml">
+		<div xmlns="http://www.w3.org/1999/xhtml" tal:content="structure item/content"/>
+	</content>
+</entry>
+</feed>

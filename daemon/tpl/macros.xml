@@ -1,0 +1,108 @@
+<tal:block metal:define-macro="combatStats">
+	<tr tal:condition="combatStats/count1">
+		<th tal:condition="combatStats/count2">
+			<tal:block condition="combatStats/type2_name">Pierwszy atak</tal:block>
+			<tal:block condition="not:combatStats/type2_name">Atak z tarczą</tal:block>
+		</th>
+		<th tal:condition="not:combatStats/count2">Atak dwuręczny</th>
+		<td>
+			<b tal:condition="php:combatStats['count1'] gt 1">${combatStats/count1}x</b>
+			${combatStats/type1_name}, trafienie <b>${combatStats/atk1}</b>, siła <b>${combatStats/str1}</b>
+			<tal:block condition="combatStats/sp1_type">, ${combatStats/sp1_name}(${combatStats/sp1_param})</tal:block>
+		</td>
+	</tr>
+	<tr tal:condition="php:combatStats['count2'] and combatStats['type2_name']">
+		<th>Drugi atak</th>
+		<td>
+			<b tal:condition="php:combatStats['count2'] gt 1">${combatStats/count2}x</b>
+			${combatStats/type2_name}, trafienie <b>${combatStats/atk2}</b>, siła <b>${combatStats/str2}</b>
+			<tal:block condition="combatStats/sp2_type">, ${combatStats/sp2_name}(${combatStats/sp2_param})</tal:block>
+		</td>
+	</tr>
+	<tr>
+		<th>Obrona fizyczna</th>
+		<td>obrona: <b>${combatStats/pdef}</b>, wytrzymałość: <b>${combatStats/pres}</b></td>
+	</tr>
+	<tr>
+		<th>Obrona magiczna</th>
+		<td>obrona: <b>${combatStats/mdef}</b>, wytrzymałość: <b>${combatStats/mres}</b></td>
+	</tr>
+	<tr>
+		<th>Zbroja</th>
+		<td>
+			pancerz: <b>${combatStats/armor}</b>
+			<tal:block condition="combatStats/armor_sp_type">, ${combatStats/armor_sp_name}(${combatStats/armor_sp_param})</tal:block>
+		</td>
+	</tr>
+	<tr>
+		<th>Akcja</th>
+		<td>szybkość: <b>${combatStats/speed}</b>, regeneruje <b>${combatStats/regen}</b> HP</td>
+	</tr>
+</tal:block>
+
+
+<tal:block metal:define-macro="menuBar">
+<ul class="menu border">
+<li tal:repeat="item options">
+	<a tal:condition="exists:item/url" href="${item/url}">${item/name}</a>
+	<i tal:condition="not:exists:item/url">${item/name}</i>
+</li>
+</ul>
+</tal:block>
+
+
+<tal:block metal:define-macro="pageFooter">
+<script src="static/common.js"></script>
+</tal:block>
+
+
+<tal:block metal:define-macro="pageHeader">
+<header>
+<form action="auth" method="post">
+	<p tal:condition="not:playerId">
+		<label>Login: <input name="login"/></label>
+		<label>Hasło: <input name="pass" type="password"/></label>
+		<button>zaloguj</button>
+	</p>
+	<p tal:condition="playerId">
+		<tal:block condition="activeCharacter/character_id">
+		Aktywna postać: <a href="stats-characters?view=${activeCharacter/character_id}">${activeCharacter/name}</a>
+		<tal:block condition="characterData/turns">Tury: <b>${characterData/turns}</b></tal:block>
+		</tal:block>
+		<tal:block condition="not:activeCharacter/character_id"><i>Brak aktywnej postaci.</i></tal:block>
+		<button name="logout" value="1">wyloguj</button>
+	</p>
+	<ul id="menu">
+		<tal:block condition="activeCharacter/character_id">
+			<li><a class="menu-map" href="map">otoczenie</a></li>
+			<li><a class="menu-character" href="character">postać</a></li>
+			<li><a class="menu-inventory" href="inventory">ekwipunek</a></li>
+			<li><a class="menu-clan" href="clan">klan</a></li>
+			<li><a class="menu-mail" href="mail">poczta (${activeCharacter/checkMail})</a></li>
+		</tal:block>
+		<li><a class="menu-chat" href="chat">ogłoszenia</a></li>
+		<li tal:condition="playerId"><a class="menu-account" href="account">konto</a></li>
+		<li tal:condition="not:playerId"><a class="menu-register" href="register">rejestracja</a></li>
+		<li><a class="menu-stats" href="stats">statystyki</a></li>
+		<li><a class="menu-help" href="http://pl.daemon.wikia.com/wiki/Daemon_Wiki">pomoc</a></li>
+	</ul>
+</form>
+</header>
+</tal:block>
+
+
+<tal:block metal:define-macro="pageMessages">
+<ul tal:condition="pageMessages" class="msg">
+<li tal:repeat="msg pageMessages">${msg}</li>
+</ul>
+</tal:block>
+
+
+<tal:block metal:define-macro="pageMetadata">
+<meta charset="utf-8"/>
+<title tal:content="pageTitle"/>
+<link rel="icon" type="image/png" href="static/favicon"/>
+<link rel="stylesheet" title="${pageSkinName}" href="${pageSkinUrl}/skin.css"/>
+<link rel="alternate feed" title="News" href="news" type="application/atom+xml"/>
+<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</tal:block>

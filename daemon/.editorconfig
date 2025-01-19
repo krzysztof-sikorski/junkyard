@@ -1,0 +1,21 @@
+[*]
+indent_style = tab
+max_line_length = unset
+
+[*.css]
+max_line_length = 140
+
+[*.js] # minified files
+insert_final_newline = unset
+
+[*.sql]
+indent_style = space
+
+[README-original.md]
+indent_style = unset
+max_line_length = 80
+
+[lib/jsmin.php] # vendored file
+insert_final_newline = unset
+indent_style = space
+indent_size = 2

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<h1><a href="./"><img src="static/biglogo.png" alt="Daemon 2"/></a></h1>
+
+<p>Ostatnia zmiana: <i>${lastModified}</i>.</p>
+
+<hr/>
+
+<h1>Regulamin</h1>
+
+<p>Drogi Graczu! Witamy w  świecie Daemona. Niniejszy dokument opisuje zasady obowiązujące w grze <b>Daemon 2</b>, w tym praktyki zabronione lub niezgodne z duchem gry i działające na niekorzyść społeczności graczy.</p>
+
+<h2>Postanowienia ogólne</h2>
+
+<p>Korzystanie z gry jest równoznaczne z akceptacją niniejszego regulaminu.</p>
+
+<h2>Konta i postacie</h2>
+
+<p>Zabronione są nazwy postaci:</p>
+<ul>
+<li>składające się z wyrażeń typu &quot;brak nazwy&quot; albo bezsensownych kombinacji liter lub cyfr</li>
+<li>podobne do nazw już istniejących postaci, zawierające trudne do wpisania znaki lub w inny sposób utrudniające grę innym graczom</li>
+<li>reklamujące produkt lub stronę WWW, za wyjątkiem nazw zezwolonych przez Administrację</li>
+<li>łamiące zasady prywatności lub praw autorskich (ścigane na wniosek osoby poszkodowanej)</li>
+</ul>
+
+<h2>Administracja</h2>
+
+<p>Termin <i>Administracja</i> oznacza zarówno twórców gry jak i wszelkie inne osoby wyznaczone przez nich do zarządzania grą i światem gry. Głównym zadaniem Administracji jest dbanie o odpowiedni poziom rozrywki, kulturę oraz dobro wszystkich graczy.</p>
+
+<p>Postacie należące do Administracji oznaczone są tytułami <i>Administrator</i> lub <i>Moderator</i>.</p>
+
+<p>Administracja ma prawo wglądu do wszelkich informacji przechowywanych w bazie danych gry, w tym zawartości poczty i tablicy ogłoszeń.</p>
+
+<p>Administracja, kierując się dobrem gry, ma prawo do przeprowadzania działań nie zapisanych w Regulaminie. Dotyczy to przede wszystkim pojawienia się nowych zagrań umożliwiających oszustwa niekorzystne dla gry, a także prób obejścia przepisów Regulaminu.</p>
+
+
+<h2>Kultura</h2>
+
+<p>Administracja nie będzie ingerować w konflikty między graczami dopóki nie nastąpi naruszenie regulaminu.</p>
+
+<p>Zabronione jest:</p>
+<ul>
+<li>wyzywanie, słowne poniżanie innych graczy lub Administracji w obrębie całej gry</li>
+<li>używanie słów powszechnie uznawanych za obraźliwe, zamieszczanie w swoich wypowiedziach treści wulgarnych, pornograficznych i innych niezgodnych z obowiązującym w Polsce prawem</li>
+<li>umieszczanie w grze ogłoszeń reklamowych (w tym linków do innych stron WWW) bez pozwolenia Administracji</li>
+</ul>
+
+<h2>Oszustwa w grze</h2>
+
+<p>Zabronione jest podszywanie się pod Administrację, zarówno poprzez imiona tworzonych postaci jak i wypowiedzi w grze.</p>
+
+<p>Znalezione w grze błędy (bugi) należy natychmiast po ich wykryciu zgłosić do Administracji.</p>
+
+<p>Zabronione jest nieuczciwe wzmacnianie postaci, poprzez ustawianie wyników walk czy wszelkie inne nadużycia mechaniki. Dotyczy to zarówno postaci jednego gracza jak i współpracy między kilkoma graczami.</p>
+
+<p>W razie jakichkolwiek wątpliwości należy uzyskać od Administracji informację czy planowane działanie jest zgodne z zasadami gry i nie zostanie ukarane.</p>
+
+<h2>Kary</h2>
+
+<p>Administracja ma prawo swobodnego doboru rodzaju stosowanej kary, także nieproporcjonalnie do skali przewinienia. Administracja ma także prawo odstąpienia od wymierzenia kary.</p>
+
+<p>Administracja ma prawo zablokowania dostępu do gry danej osobie bez podania przyczyny, jeśli uzna że jej działalność szkodzi grze.</p>
+
+<h2>Postanowienia końcowe</h2>
+
+<p>Administracja ma prawo do dokonywania zmian w Regulaminie w reakcji na zmiany zachodzące w grze, pod warunkiem że fakt dokonania zmian zostanie ogłoszony w grze - za pomocą tablicy ogłoszeń lub w inny wybrany przez Administrację sposób.</p>
+
+<p>Obowiązkiem graczy jest śledzenie zmian w Regulaminie, a nieznajomość Regulaminu nie zwalnia od odpowiedzialności za dokonywane wykroczenia.</p>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

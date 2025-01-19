@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Submit request log as JSON - Nexus Archive{% endblock %}
+
+{% block body %}
+    <form action="{{ path(name='app_submit_json') }}" method="post">
+        <p><label>User access token: <input name="userAccessToken" type="text" required size="64"></label></p>
+        <p><label>JSON data: <textarea name="jsonData" required cols="64" rows="16"></textarea></label></p>
+        <p><button type="submit">Submit</button></p>
+    </form>
+{% endblock %}

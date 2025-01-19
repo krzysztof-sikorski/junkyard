@@ -1,0 +1,19 @@
+<h2>${attackerName} vs ${defenderName}</h2>
+
+<section tal:condition="winner">
+	<p>Walkę wygrywa <i>${winnerName}</i>, zdobywając <b>${winnerXp}</b> doświadczenia.</p>
+	<p tal:condition="winnerLevel">${winnerName} zdobywa nowy poziom: <b>${winnerLevel}</b>.</p>
+	<p tal:condition="not:arena" class="ex">${loserName} traci powłokę cielesną.</p>
+</section>
+
+<section tal:condition="not:winner">
+	<p class="ex">Walka zakończyła się <b>remisem</b>.</p>
+</section>
+
+<section tal:condition="characterData/health">
+	<p>
+		Zdrowie: <b>${characterData/health} / ${characterData/health_max}</b>
+	</p>
+</section>
+
+<section tal:content="structure combatLog"></section>

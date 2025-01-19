@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+
+<tal:block metal:use-macro="macros.xml/menuBar" define="options menu"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<p tal:condition="not:duel">Wybrany log jest niedostępny.</p>
+
+<tal:block condition="duel">
+	<h1>${duel/attacker_name} vs ${duel/defender_name}</h1>
+	<section tal:content="structure duel/combat_log"></section>
+</tal:block>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

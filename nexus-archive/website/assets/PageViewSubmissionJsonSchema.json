@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://nexus-archive.zerozero.pl/submit-json",
+  "type": "object",
+  "properties": {
+    "requestStartedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "responseCompletedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "GET",
+        "POST"
+      ]
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "formData": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "responseBody": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "requestStartedAt",
+    "responseCompletedAt",
+    "method",
+    "url",
+    "formData",
+    "responseBody"
+  ],
+  "additionalProperties": false
+}

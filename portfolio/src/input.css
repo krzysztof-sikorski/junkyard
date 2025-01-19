@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply tw-mx-4 sm:tw-mx-8 md:tw-container md:tw-mx-auto tw-font-mono tw-text-emerald-500 tw-bg-neutral-900;
+}
+
+p, li {
+  @apply tw-my-2;
+}
+
+a {
+  @apply tw-text-amber-300 tw-underline tw-decoration-dotted;
+}
+
+a:hover {
+  @apply tw-outline-dotted tw-outline-offset-4;
+}
+
+a[rel="external"]:after {
+  content: ' \002197';
+}
+
+code {
+  @apply tw-text-indigo-300 tw-bg-black tw-underline tw-decoration-dotted;
+}
+
+h1 {
+  @apply tw-my-8 tw-text-2xl tw-font-bold;
+}
+
+h2 {
+  @apply tw-my-4 tw-text-xl tw-font-bold;
+}
+
+header, main, footer {
+  @apply tw-my-4 sm:tw-my-8;
+}
+
+header > h1, main > h1, footer > h1 {
+  @apply tw-my-0 tw-mt-6 tw-text-4xl;
+}
+
+header p:first-of-type {
+  @apply tw-text-lg tw-italic;
+}
+
+header em.name {
+  @apply tw-text-lg tw-text-emerald-300;
+}
+
+section.cols-4 {
+  @apply md:tw-grid md:tw-gap-8 lg:tw-gap-16 md:tw-grid-cols-1 md:tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-4;
+}
+
+section.cols-3 {
+  @apply md:tw-grid md:tw-gap-8 lg:tw-gap-16 md:tw-grid-cols-1 md:tw-grid-cols-2 xl:tw-grid-cols-3;
+}
+
+footer li {
+  @apply tw-list-disc tw-list-inside;
+}

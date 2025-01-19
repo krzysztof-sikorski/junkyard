@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<section tal:condition="eventLog" tal:content="structure eventLog"></section>
+
+<section class="multicols">
+	<form action="" method="post">
+		<table>
+			<tr tal:repeat="slot equipment">
+				<th>${slot/slotName}</th>
+				<td tal:condition="not:slot/item"><i>brak</i></td>
+				<td tal:condition="slot/item">
+					${slot/item/name}
+					<tal:block condition="exists:slot/flags/bound"><i>(przypisany)</i></tal:block>
+					<button name="unequip" value="${slot/inventoryId}">zdejmij</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+	<table>
+		<tr><th>Zdrowie</th><td>${characterData/health} / ${characterData/health_max}</td></tr>
+		<tr><th>Mana</th><td>${characterData/mana} / ${characterData/mana_max}</td></tr>
+		<tal:block metal:use-macro="macros.xml/combatStats"/>
+	</table>
+</section>
+
+<section tal:repeat="group items" class="item-list">
+<tal:block condition="group/items">
+<h1>${group/name}</h1>
+<img src="static/item-types/${repeat/group/key}.gif" alt=""/>
+<form tal:repeat="inv group/items" action="" method="post">
+<fieldset>
+	<legend>${inv/item/name} <tal:block condition="exists:inv/flags/bound"><i>(przypisany)</i></tal:block></legend>
+	<tal:block condition="inv/_showSlots" repeat="slot inv/_slots">
+		<input tal:condition="not:inv/_multiSlots" type="hidden" name="slot" value="${slot}"/>
+		<label tal:condition="inv/_multiSlots">
+			<input type="radio" name="slot" value="${slot}" tal:attributes="checked repeat/slot/start"/>
+			<tal:block content="php:equipmentSlots[slot]"/>
+		</label>
+	</tal:block>
+	<button name="${inv/item/_cmdType}" value="${inv/inventory_id}">${inv/item/_cmdName}</button>
+	<tal:block condition="not:exists:inv/flags/identified"><i>niezidentyfikowany</i></tal:block>
+	<tal:block condition="exists:inv/flags/identified">
+		<i>${inv/item/description}</i><br/>${inv/item/getDescription}
+	</tal:block>
+</fieldset>
+</form>
+</tal:block>
+</section>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

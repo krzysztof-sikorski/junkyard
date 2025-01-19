@@ -1,0 +1,7 @@
+{
+  "Verbose": true,
+  "Exclude": [
+    "^.git/",
+    "^.idea/"
+  ]
+}

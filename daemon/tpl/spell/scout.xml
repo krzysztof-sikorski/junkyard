@@ -1,0 +1,25 @@
+<table>
+<thead>
+<tr>
+	<th>Lokacja</th>
+	<th>Szansa na zdarzenie</th>
+	<th>Zdarzenia</th>
+</tr>
+</thead>
+<tbody>
+<tr tal:repeat="location locations">
+	<td>${location/name}</td>
+	<td>${location/chance1} / ${location/chance2}</td>
+<!--
+	<td tal:condition="not:location/_monsters"><i>brak</i></td>
+	<td tal:condition="location/_monsters">${location/_monsters}</td>
+	<td tal:condition="not:location/_events"><i>brak</i></td>
+	<td tal:condition="location/_events">${location/_events}</td>
+-->
+	<td>
+		<tal:block repeat="x location/_monsters">${x}<br tal:condition="not:repeat/x/end"/></tal:block>
+		<tal:block repeat="x location/_events">${x}<br tal:condition="not:repeat/x/end"/></tal:block>
+	</td>
+</tr>
+</tbody>
+</table>

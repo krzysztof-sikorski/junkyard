@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head><tal:block metal:use-macro="macros.xml/pageMetadata"/></head>
+<body>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+
+<tal:block metal:use-macro="macros.xml/menuBar" define="options menu"/>
+<tal:block metal:use-macro="macros.xml/pageMessages"/>
+
+<table class="border">
+
+<tr>
+<th>ID</th>
+<tal:block repeat="item headers">
+<th><a href="?sort=${repeat/item/key}" tal:omit-tag="exists:item/selected">
+<abbr tal:condition="exists:item/abbr" title="${item/name}">${item/abbr}</abbr>
+<tal:block condition="not:exists:item/abbr">${item/name}</tal:block>
+</a></th>
+</tal:block>
+</tr>
+
+<tr tal:repeat="item list">
+<td>${item/character_id}</td>
+<td><a href="?view=${item/character_id}">${item/name}</a></td>
+<td>${item/level}</td>
+<td>${item/xp_used}</td>
+<td tal:condition="not:item/faction_id"><i>brak</i></td>
+<td tal:condition="item/faction_id">${item/faction_id} (r${item/rank_id})</td>
+<td tal:condition="not:item/clan_id"><i>brak</i></td>
+<td tal:condition="item/clan_id"><a href="stats-clans?view=${item/clan_id}">${item/clan_id}</a></td>
+<td>${item/date_created}</td>
+<td>${item/last_action}</td>
+<td>${item/duel_wins}</td>
+<td>${item/duel_losses}</td>
+</tr>
+
+</table>
+
+<p tal:condition="nextUrl"><a href="${nextUrl}">następna strona...</a></p>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</body>
+</html>

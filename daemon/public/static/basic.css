@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+* {font-family:sans-serif; border-width:thin; outline-width:thin}
+body {padding:1ex}
+h1, h2, h3 {margin-top:0; margin-bottom:0}
+a > img {border-style:none; vertical-align:text-bottom}
+a > * {color:inherit; background-color:transparent}
+a[rel=feed] {padding-right:16px;background:url("feed.png") no-repeat right}
+caption {margin-top:1em}
+th, td {padding-left:1ex; padding-right:1ex}
+
+header {display:table; margin-bottom:1ex}
+header > h1, header > form {display:table-cell}
+header > h1 {vertical-align:top; max-width:50%}
+header > h1 * {width:100%}
+header p, header ul {margin:.2ex 2ex}
+header ul {list-style-type:none; padding-left:0}
+header ul > li {margin-right:1ex; text-align:center}
+section {display:block; margin-top:1ex; margin-bottom:1ex}
+#menu {display:block; clear:both}
+#menu > li {display:block; float:left}
+#menu > li > a {display:block; float:left; min-width:100px; padding-top:85px; background-repeat:no-repeat}
+
+.msg {font-weight:bold; padding:0 1ex; outline-style:solid}
+ul.msg > li {margin:0; list-style-position:inside}
+ul.menu {padding:.5em 1ex; list-style-type:none}
+ul.menu > li {display:inline; margin:0 1ex}
+ul.menu > li > * {display:inline}
+ul.news {padding-left:0}
+dt {font-weight:bold}
+
+fieldset {margin:1ex}
+form > p {margin-left:1ex}
+label {white-space:nowrap}
+input, select, textarea, button {border-style:solid; border-color:#000; font-family:monospace; margin:0.5ex}
+button {cursor:pointer; font-family:sans-serif}
+th label, td label {font-weight:normal}
+input[type=checkbox], input[type=radio] {vertical-align:middle}
+button {border-style:outset; -moz-border-radius:4px; border-radius:4px}
+
+.center {text-align:center}
+.center legend {text-align:center; margin:auto}
+.border {border-style:solid}
+table.border {margin:1ex}
+table.border th, table.border td {border-style:solid}
+
+.avatar {text-align:center}
+.avatar img, img.bbcode {max-width:400px; max-height:500px}
+
+.multicols {display:table; width:100%; border-collapse:separate; border-spacing:1ex}
+.multicols > * {display:table-cell; padding:1ex; vertical-align:top; border-style:solid}
+
+.ex {font-size:1.5em; font-weight:bold;}
+
+form.pretty > fieldset {text-align:center}
+form.pretty ul {margin:0; padding:0; text-align:left}
+form.pretty li {list-style:none; margin: 0; padding: 1ex}
+form.pretty li > * {margin:0; padding:0}
+form.pretty li > label {display: inline-block; min-width:25%; line-height:1.8; vertical-align: top}
+form.pretty li > input[type=checkbox] {margin-left:25%}
+
+div.locationName {height:20em; background-position: center center; background-repeat: no-repeat}
+div.locationName *, div.locationName a {background: transparent}
+
+section.item-list {clear:both}
+section.item-list > img {float:left}
+section.item-list > form {margin-left:155px}

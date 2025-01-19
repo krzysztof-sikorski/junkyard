@@ -1,0 +1,30 @@
+<section>
+<h1>Leczenie</h1>
+<form action="" method="post">
+<p tal:condition="not:bankEnabled">
+	W sakiewce masz <b>${characterData/gold_purse}</b> sztuk złota.
+</p>
+<p tal:condition="bankEnabled">
+	Na koncie masz <b>${characterData/gold_bank}</b> sztuk złota,
+	w sakiewce <b>${characterData/gold_purse}</b> sztuk złota.
+	Możesz zapłacić przelewem.
+</p>
+<p>
+	<input name="heal" value="1" size="6"/>
+	<button>opłać leczenie</button>
+	<i>${deltaHealthMin}-${deltaHealthMax} zdrowia i ${deltaManaMin}-${deltaManaMax} many za każdą sztukę złota</i>
+</p>
+</form>
+</section>
+
+<section>
+<h1>Odpoczynek</h1>
+<form action="" method="post">
+<p>
+	Zdrowie: <b>${characterData/health} / ${characterData/health_max}</b>
+	Mana: <b>${characterData/mana} / ${characterData/mana_max}</b>
+	<button name="rest" value="1">odpocznij 1 turę</button>
+	<i>Bezpieczniej niż na zewnątrz...</i>
+</p>
+</form>
+</section>

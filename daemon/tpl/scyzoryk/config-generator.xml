@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<tal:block metal:use-macro="macros.xml/pageMetadata"/>
+<tal:block metal:use-macro="macros.xml/pageHeader"/>
+<tal:block metal:use-macro="../macros.xml/pageMessages"/>
+
+<form action="" method="post">
+<table class="border">
+
+<tr>
+	<th>Wartość bazowa</th>
+	<td colspan="2">
+		<input name="baseValue" value="${generatorBaseValue}" size="8"/>
+		<i>wycena = wartość bazowa * (cecha1 * mnożnik1 + cecha2 * mnożnik2 + ...)</i>
+	</td>
+</tr>
+
+<tr>
+	<th>Typ przedmiotu</th>
+	<th>Mnożniki</th>
+</tr>
+
+<tal:block repeat="row generatorOptions">
+<tr>
+	<th>${row/name}</th>
+	<td>
+		PSTR:
+		<label>%<input name="weights[${repeat/row/key}][pstr_p]" value="${row/weights/pstr_p}" size="6"/></label>
+		<label>+<input name="weights[${repeat/row/key}][pstr_c]" value="${row/weights/pstr_c}" size="6"/></label>
+		PATK:
+		<label>%<input name="weights[${repeat/row/key}][patk_p]" value="${row/weights/patk_p}" size="6"/></label>
+		<label>+<input name="weights[${repeat/row/key}][patk_c]" value="${row/weights/patk_c}" size="6"/></label>
+		<br/>
+		PDEF:
+		<label>%<input name="weights[${repeat/row/key}][pdef_p]" value="${row/weights/pdef_p}" size="6"/></label>
+		<label>+<input name="weights[${repeat/row/key}][pdef_c]" value="${row/weights/pdef_c}" size="6"/></label>
+		PRES:
+		<label>%<input name="weights[${repeat/row/key}][pres_p]" value="${row/weights/pres_p}" size="6"/></label>
+		<label>+<input name="weights[${repeat/row/key}][pres_c]" value="${row/weights/pres_c}" size="6"/></label>
+		<br/>
+		MSTR:
+		<label>%<input name="weights[${repeat/row/key}][mstr_p]" value="${row/weights/mstr_p}" size="6"/></label>
+		<label>+<input name="weights[${repeat/row/key}][mstr_c]" value="${row/weights/mstr_c}" size="6"/></label>
+		MATK:
+		<label>%<input name="weights[${repeat/row/key}][matk_p]" value="${row/weights/matk_p}" size="6"/></label>
+		<label>+<input name="weights[${repeat/row/key}][matk_c]" value="${row/weights/matk_c}" size="6"/></label>
+		<br/>
+		MDEF:
+		<label>%<input name="weights[${repeat/row/key}][mdef_p]" value="${row/weights/mdef_p}" size="6"/></label>
+		<label>+<input name="weights[${repeat/row/key}][mdef_c]" value="${row/weights/mdef_c}" size="6"/></label>
+		MRES:
+		<label>%<input name="weights[${repeat/row/key}][mres_p]" value="${row/weights/mres_p}" size="6"/></label>
+		<label>+<input name="weights[${repeat/row/key}][mres_c]" value="${row/weights/mres_c}" size="6"/></label>
+		<br/>
+		Pancerz:
+		<label>+<input name="weights[${repeat/row/key}][armor]" value="${row/weights/armor}" size="6"/></label>
+		Szybkość:
+		<label>%<input name="weights[${repeat/row/key}][speed]" value="${row/weights/speed}" size="6"/></label>
+		Regeneracja:
+		<label>+<input name="weights[${repeat/row/key}][regen]" value="${row/weights/regen}" size="6"/></label>
+	</td>
+</tr>
+</tal:block>
+
+<tr>
+	<th></th>
+	<td colspan="2">
+		<button>zapisz</button>
+	</td>
+</tr>
+
+</table>
+</form>
+
+<tal:block metal:use-macro="macros.xml/pageFooter"/>
+</html>
